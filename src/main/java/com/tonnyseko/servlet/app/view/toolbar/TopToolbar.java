@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopToolbar implements Serializable {
+public class TopToolbar implements Menu, Serializable {
     private final List<MenuLink> links = new ArrayList<>();
 
     {

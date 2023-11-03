@@ -12,12 +12,12 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 
 public class AppPage implements Serializable {
-    public void renderHtml(HttpServletRequest req, HttpServletResponse res int activeMenu, String content) throws IOException{
+    public void renderHtml(HttpServletRequest req, HttpServletResponse res, int activeMenu, String content) throws IOException{
         HttpSession session = req.getSession();
         ServletContext context = req.getServletContext();
         PrintWriter print = res.getWriter();
 
-        print.write("<DOCTYPE html>" +
+        print.write("<!DOCTYPE html>" +
                 "<html>" +
                 "<head>" +
                     new AppCss().getStyle() +

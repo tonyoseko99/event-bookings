@@ -1,6 +1,7 @@
 package com.tonnyseko.servlet.home;
 
 import com.tonnyseko.servlet.app.bean.BookingBean;
+import com.tonnyseko.servlet.app.view.html.AppPage;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
@@ -21,7 +22,8 @@ public class Home extends HttpServlet {
         if(StringUtils.isNotBlank((String) session.getAttribute("loggedInId"))){
             BookingBean bookingBean = new BookingBean();
 
-            new AppPage().renderHtml(req, resp, 0, "<h2>List of Bookings</h2" + bookingBean.listOfBookings())
+            new AppPage().renderHtml(request, response, 0,
+                    "<h2>List of Bookings</h2" + bookingBean.listOfBookings());
         } else {
             response.sendRedirect("./");
         }

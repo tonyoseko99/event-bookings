@@ -3,7 +3,7 @@ package com.tonnyseko.servlet.app.model.entity;
 import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 
-public class Booking implements Serializable {
+public class Event implements Serializable {
 
     private String name;
     private String email;
@@ -13,11 +13,11 @@ public class Booking implements Serializable {
     private String guests;
     private String message;
 
-    public Booking() {
+    public Event() {
 
     }
 
-    public Booking(String name, String email, String phone, String date, String time, String guests, String message) {
+    public Event(String name, String email, String phone, String date, String time, String guests, String message) {
         super();
         this.name = name;
         this.email = email;
