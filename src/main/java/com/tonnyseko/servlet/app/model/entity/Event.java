@@ -6,38 +6,32 @@ import java.io.Serializable;
 public class Event implements Serializable {
 
     private String name;
-    private String email;
-    private String phone;
+    private String venue;
     private String date;
     private String time;
     private String guests;
-    private String message;
+    private String description;
 
     public Event() {
 
     }
 
-    public Event(String name, String email, String phone, String date, String time, String guests, String message) {
+    public Event(String name, String venue, String date, String time, String guests, String description) {
         super();
         this.name = name;
-        this.email = email;
-        this.phone = phone;
+        this.venue = venue;
         this.date = date;
         this.time = time;
         this.guests = guests;
-        this.message = message;
+        this.description = description;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone() {
-        return phone;
+    public String getVenue() {
+        return venue;
     }
 
     public String getDate() {
@@ -52,8 +46,8 @@ public class Event implements Serializable {
         return guests;
     }
 
-    public String getMessage() {
-        return message;
+    public String getDescription() {
+        return description;
     }
 
     // create a stringbuilder to append the booking details in a list html format
@@ -61,12 +55,11 @@ public class Event implements Serializable {
         StringBuilder listBuilder = new StringBuilder();
         listBuilder.append("<ul>");
         listBuilder.append("<li>Name: ").append(StringUtils.trimToEmpty(getName())).append("</li>");
-        listBuilder.append("<li>Email: ").append(StringUtils.trimToEmpty(getEmail())).append("</li>");
-        listBuilder.append("<li>Phone: ").append(StringUtils.trimToEmpty(getPhone())).append("</li>");
+        listBuilder.append("<li>Venue: ").append(StringUtils.trimToEmpty(getVenue())).append("</li>");
         listBuilder.append("<li>Date: ").append(StringUtils.trimToEmpty(getDate())).append("</li>");
         listBuilder.append("<li>Time: ").append(StringUtils.trimToEmpty(getTime())).append("</li>");
         listBuilder.append("<li>Guests: ").append(StringUtils.trimToEmpty(getGuests())).append("</li>");
-        listBuilder.append("<li>Message: ").append(StringUtils.trimToEmpty(getMessage())).append("</li>");
+        listBuilder.append("<li>Description: ").append(StringUtils.trimToEmpty(getDescription())).append("</li>");
         listBuilder.append("</ul>");
         return listBuilder.toString();
     }

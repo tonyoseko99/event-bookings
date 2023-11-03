@@ -9,7 +9,7 @@ import com.tonnyseko.servlet.app.model.entity.Event;
 public class BookingBean implements BookingBeanInterface, Serializable {
     public String listOfBookings() {
         List<Event> bookings = new ArrayList<>();
-        bookings.add(new Event("John Doe", "j@test.com", "0712345678", "2020-01-01", "12:00", "2", "Test message"));
+        bookings.add(new Event("DevFest", "Nairobi, Kenya", "2020-01-01", "12:00", "2", "A GDG Tech Event 2023"));
 
         StringBuilder sb = new StringBuilder();
         sb.append("<ul>");
