@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tonnyseko.servlet.app.model.Booking;
+import com.tonnyseko.servlet.app.model.entity.Booking;
 
 public class BookingBean implements BookingBeanInterface, Serializable {
     public String listOfBookings() {

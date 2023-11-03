@@ -1,6 +1,6 @@
 package com.tonnyseko.servlet.app.bean;
 
-import com.tonnyseko.servlet.app.model.Booking;
+import com.tonnyseko.servlet.app.model.entity.Booking;
 
 public interface BookingBeanInterface {
     public String listOfBookings();

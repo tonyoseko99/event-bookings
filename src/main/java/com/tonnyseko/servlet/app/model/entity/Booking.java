@@ -1,4 +1,4 @@
-package com.tonnyseko.servlet.app.model;
+package com.tonnyseko.servlet.app.model.entity;
 
 import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
