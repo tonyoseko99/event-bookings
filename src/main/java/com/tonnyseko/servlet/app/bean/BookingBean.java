@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.tonnyseko.servlet.app.model.Booking;
 
-public class BookingBean implements Serializable {
+public class BookingBean implements BookingBeanInterface, Serializable {
     public String listOfBookings() {
         List<Booking> bookings = new ArrayList<>();
         bookings.add(new Booking("John Doe", "j@test.com", "0712345678", "2020-01-01", "12:00", "2", "Test message"));
@@ -28,7 +28,7 @@ public class BookingBean implements Serializable {
         return null;
     }
 
-    public void deleteBooking(Booking account) throws Exception {
+    public void deleteBooking(Booking account) {
 
     }
 }
