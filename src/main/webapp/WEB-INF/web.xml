@@ -4,4 +4,17 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <context-param>
+    <param-name>AppName</param-name>
+    <param-value>Events Booking Platform</param-value>
+  </context-param>
+  <context-param>
+    <param-name>username</param-name>
+    <param-value>tonny@test.com</param-value>
+  </context-param>
+  <context-param>
+    <param-name>password</param-name>
+    <param-value>Admin123</param-value>
+  </context-param>
 </web-app>
