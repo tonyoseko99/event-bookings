@@ -4,12 +4,17 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-    <servlet-name>Tony</servlet-name>
-    <servlet-class>com.tonnyseko.servlet.Hello</servlet-class>
-  </servlet>
-    <servlet-mapping>
-        <servlet-name>Tony</servlet-name>
-        <url-pattern>/hello</url-pattern>
-    </servlet-mapping>
+
+  <context-param>
+    <param-name>AppName</param-name>
+    <param-value>Events Booking Platform</param-value>
+  </context-param>
+  <context-param>
+    <param-name>username</param-name>
+    <param-value>tonny@test.com</param-value>
+  </context-param>
+  <context-param>
+    <param-name>password</param-name>
+    <param-value>Admin123</param-value>
+  </context-param>
 </web-app>
