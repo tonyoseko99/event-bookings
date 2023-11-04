@@ -26,6 +26,8 @@ public class AppPage implements Serializable {
 
                 new TopToolbar().menu(activeMenu) +
 
+                "<h3>Welcome: " + session.getAttribute("username") + "</h3><br/>" +
+
                 "<h3>" + context.getInitParameter("AppName") + "<h3>" +
                 "<br/>&nbsp;<br/>" +
                 "<h3>Welcome: " + session.getAttribute("username") + "</h3><br/>");

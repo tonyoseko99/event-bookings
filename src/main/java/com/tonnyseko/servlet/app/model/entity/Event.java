@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class Event implements Serializable {
 
     private String name;
+    private String image;
     private String venue;
     private String date;
     private String time;
@@ -16,9 +17,10 @@ public class Event implements Serializable {
 
     }
 
-    public Event(String name, String venue, String date, String time, String guests, String description) {
+    public Event(String name, String image, String venue, String date, String time, String guests, String description) {
         super();
         this.name = name;
+        this.image = image;
         this.venue = venue;
         this.date = date;
         this.time = time;
@@ -28,6 +30,10 @@ public class Event implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public String getVenue() {
@@ -55,6 +61,7 @@ public class Event implements Serializable {
         StringBuilder listBuilder = new StringBuilder();
         listBuilder.append("<ul>");
         listBuilder.append("<li>Name: ").append(StringUtils.trimToEmpty(getName())).append("</li>");
+        listBuilder.append("<li>Image: ").append(StringUtils.trimToEmpty(getImage())).append("</li>");
         listBuilder.append("<li>Venue: ").append(StringUtils.trimToEmpty(getVenue())).append("</li>");
         listBuilder.append("<li>Date: ").append(StringUtils.trimToEmpty(getDate())).append("</li>");
         listBuilder.append("<li>Time: ").append(StringUtils.trimToEmpty(getTime())).append("</li>");

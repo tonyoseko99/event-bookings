@@ -1,5 +1,7 @@
 package com.tonnyseko.servlet.auth;
 
+import com.tonnyseko.servlet.app.model.entity.User;
+import com.tonnyseko.servlet.database.Database;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -27,21 +29,25 @@ public class Login extends HttpServlet {
     }
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 
-        HttpSession session = req.getSession();
-        session.setAttribute("loggedInId", new Date().getTime() + "");
-
-        ServletContext context = getServletContext();
-
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        if (username.equals(context.getInitParameter("username")) && password.equals(context.getInitParameter("password"))){
-            session.setAttribute("username", username);
-            resp.sendRedirect("./home");
-        } else {
-            PrintWriter print = resp.getWriter();
-            print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
+        Database database = Database.getDbInstance();
+
+        for (User user : database.getUsers()) {
+            if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+                HttpSession session = req.getSession(true);
+
+                session.setAttribute("loggedInId", new Date().getTime() + "");
+                session.setAttribute("username", username);
+
+                resp.sendRedirect("./home");
+
+            }
         }
+
+        PrintWriter print = resp.getWriter();
+        print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
 
     }
 }
