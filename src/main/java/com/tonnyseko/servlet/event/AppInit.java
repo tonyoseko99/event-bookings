@@ -1,6 +1,7 @@
 package com.tonnyseko.servlet.event;
 
 import com.tonnyseko.servlet.app.model.entity.Event;
+import com.tonnyseko.servlet.app.model.entity.User;
 import com.tonnyseko.servlet.database.Database;
 
 import javax.servlet.ServletContextEvent;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class AppInit implements ServletContextListener {
+    @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Database instance created");
 
@@ -20,8 +22,13 @@ public class AppInit implements ServletContextListener {
         db.getEvents().add(new Event("I/O Extended", "Nairobi, Kenya", "2020-01-01", "12:00", "2", "A Google Tech Event 2023"));
         db.getEvents().add(new Event("Flutter Live", "Nairobi, Kenya", "2020-01-01", "12:00", "2", "A Flutter Tech Event 2023"));
         db.getEvents().add(new Event("Google Cloud Next", "Nairobi, Kenya", "2020-01-01", "12:00", "2", "A Google Cloud Tech Event 2023"));
+
+//        add some data to the database users
+        db.getUsers().add(new User(1L, "tonnyseko@gmail.com", "123456"));
+        db.getUsers().add(new User(2L, "nick@systech.com", "123456"));
     }
 
+    @Override
     public void contextDestroyed(ServletContextEvent sce) {
         System.out.println("Database instance destroyed");
     }

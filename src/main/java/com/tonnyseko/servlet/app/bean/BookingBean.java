@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tonnyseko.servlet.app.model.entity.Event;
+import com.tonnyseko.servlet.database.Database;
 
 public class BookingBean implements BookingBeanInterface, Serializable {
     public String listOfBookings() {
-        List<Event> events = new ArrayList<>();
-        events.add(new Event("DevFest", "Nairobi, Kenya", "2020-01-01", "12:00", "2", "A GDG Tech Event 2023"));
+        List<Event> events = Database.getDbInstance().getEvents();
 
         StringBuilder sb = new StringBuilder();
         sb.append("<ul>");
