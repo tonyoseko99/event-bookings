@@ -1,4 +1,4 @@
-package com.tonnyseko.servlet.home;
+package com.tonnyseko.servlet.action;
 
 import com.tonnyseko.servlet.app.bean.BookingBean;
 import com.tonnyseko.servlet.app.view.html.AppPage;

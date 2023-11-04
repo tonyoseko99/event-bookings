@@ -8,14 +8,14 @@ import com.tonnyseko.servlet.app.model.entity.Event;
 
 public class BookingBean implements BookingBeanInterface, Serializable {
     public String listOfBookings() {
-        List<Event> bookings = new ArrayList<>();
-        bookings.add(new Event("DevFest", "Nairobi, Kenya", "2020-01-01", "12:00", "2", "A GDG Tech Event 2023"));
+        List<Event> events = new ArrayList<>();
+        events.add(new Event("DevFest", "Nairobi, Kenya", "2020-01-01", "12:00", "2", "A GDG Tech Event 2023"));
 
         StringBuilder sb = new StringBuilder();
         sb.append("<ul>");
-        for (Event booking : bookings) {
+        for (Event event : events) {
             sb.append("<li>");
-            sb.append(booking.getName());
+            sb.append(event.getName());
             sb.append("</li>");
         }
 
@@ -24,11 +24,11 @@ public class BookingBean implements BookingBeanInterface, Serializable {
 
     }
 
-    public Event addBooking(Event account) throws Exception {
+    public Event addBooking(Event event) throws Exception {
         return null;
     }
 
-    public void deleteBooking(Event account) {
+    public void deleteBooking(Event event) {
 
     }
 }
