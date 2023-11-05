@@ -23,7 +23,7 @@ public class Home extends HttpServlet {
             EventBean bookingBean = new EventBean();
 
             new AppPage().renderHtml(request, response, 0,
-                    bookingBean.listOfBookings());
+                    bookingBean.getFeaturedEvent());
         } else {
             response.sendRedirect("./");
         }

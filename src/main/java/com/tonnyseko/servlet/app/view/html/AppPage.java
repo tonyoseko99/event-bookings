@@ -12,25 +12,27 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 
 public class AppPage implements Serializable {
-    public void renderHtml(HttpServletRequest req, HttpServletResponse res, int activeMenu, String content)
-            throws IOException {
-        HttpSession session = req.getSession();
-        ServletContext context = req.getServletContext();
-        PrintWriter print = res.getWriter();
+        public void renderHtml(HttpServletRequest req, HttpServletResponse res, int activeMenu, String content)
+                        throws IOException {
+                HttpSession session = req.getSession();
+                ServletContext context = req.getServletContext();
+                PrintWriter print = res.getWriter();
 
-        print.write("<!DOCTYPE html>" +
-                "<html>" +
-                "<head>" +
-                new AppCss().getStyle() +
-                "</head>" +
-                "<body>" +
+                print.write("<!DOCTYPE html>" +
+                                "<html>" +
+                                "<head>" +
+                                new AppCss().getStyle() +
+                                "</head>" +
+                                "<body>" +
 
-                new TopToolbar().menu(activeMenu) +
+                                new TopToolbar().menu(activeMenu) +
 
-                "<h3 class=\"app-name\">" + context.getInitParameter("AppName") + "<h3>");
-        print.write(content);
-        print.write("<a href=\"./logout\">Logout</a>" +
-                "</body>" +
-                "</html>");
-    }
+                                "<h3 class=\"app-name\">" + context.getInitParameter("AppName") + "<h3>");
+
+                print.write(content);
+
+                print.write(
+                                "</body>" +
+                                                "</html>");
+        }
 }
