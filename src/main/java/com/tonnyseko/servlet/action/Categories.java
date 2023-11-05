@@ -18,15 +18,13 @@ import java.io.PrintWriter;
 @WebServlet("/categories")
 public class Categories extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         EventBean eventBean = new EventBean();
 
-        if(StringUtils.isNotBlank((String) session.getAttribute("loggedInId"))){
+        if (StringUtils.isNotBlank((String) session.getAttribute("loggedInId"))) {
             new AppPage().renderHtml(request, response, 2, eventBean.getCategories());
         } else {
             response.sendRedirect("./");
         }
-
     }
 }

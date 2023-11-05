@@ -89,6 +89,18 @@ public class AppCss implements Serializable {
             "input[type=\"submit\"]:hover {" +
             "background-color: #0056b3;" +
             "}" +
+            ".content {" +
+            "padding: 16px;" +
+            "display: flex;" +
+            "flex-direction: row;" +
+            "flex-wrap: wrap;" +
+            "justify-content: center;" +
+            "}" +
+            "#add-event {" +
+            "margin-top: -30px;" +
+            
+            "}" +
+
             "</style>";
 
     public String getStyle() {

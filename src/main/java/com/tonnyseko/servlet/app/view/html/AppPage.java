@@ -29,7 +29,7 @@ public class AppPage implements Serializable {
 
                                 "<h3 class=\"app-name\">" + context.getInitParameter("AppName") + "<h3>");
 
-                print.write(content);
+                print.write("<div class=\"content\">" + content + "</div>");
 
                 print.write(
                                 "</body>" +

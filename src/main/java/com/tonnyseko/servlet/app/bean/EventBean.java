@@ -2,7 +2,6 @@ package com.tonnyseko.servlet.app.bean;
 
 import java.io.Serializable;
 import java.util.List;
-
 import com.tonnyseko.servlet.app.model.entity.Event;
 import com.tonnyseko.servlet.app.model.view.CategoryStatus;
 import com.tonnyseko.servlet.database.Database;
@@ -74,6 +73,10 @@ public class EventBean implements EventInterface, Serializable {
         return sb.toString();
     }
 
+    public List<Event> getEvents() {
+        return Database.getDbInstance().getEvents();
+    }
+
     public String getCategories() {
         // list of categories
 
@@ -82,7 +85,6 @@ public class EventBean implements EventInterface, Serializable {
         StringBuilder sb = new StringBuilder();
         for (CategoryStatus category : categories) {
             sb.append("<div class=\"main-page-feature\">");
-            sb.append("<h2>Categories</h2>");
             sb.append("<a href=\"./categories?category=").append(category).append("\" class=\"btn btn-primary\">")
                     .append(category).append("</a>");
             sb.append("</div>");
@@ -93,8 +95,33 @@ public class EventBean implements EventInterface, Serializable {
 
     }
 
-    public String sortPerCategory() {
-        return null;
+    public String sortPerCategory(CategoryStatus category) {
+        List<Event> events = getEvents();
+        // filter events per category
+
+        List<Event> filteredEvents = events.stream().filter(event -> event.getCategory().equals(category))
+                .collect(java.util.stream.Collectors.toList());
+
+
+        StringBuilder sb = new StringBuilder();
+        for (Event event : filteredEvents) {
+
+            sb.append("<div class=\"card-section\">");
+            sb.append("<div class=\"card-content\">");
+            sb.append("<img src=\"").append(event.getImage()).append("\" alt=\"").append(event.getName())
+                    .append("\" style=\"width:100%\">");
+            sb.append("<h2>").append(event.getName()).append("</h2>");
+            sb.append("<p>").append("Venue: ").append(event.getVenue()).append("</p>");
+            sb.append("<p>").append("Date: ").append(event.getDate()).append("</p>");
+            sb.append("<p>").append("Time: ").append(event.getTime()).append("</p>");
+            sb.append("<p>").append("Category: ").append(event.getCategory()).append("</p>");
+            sb.append("<p>").append("Description: ").append(event.getDescription()).append("</p>");
+            sb.append("</div>");
+            sb.append("</div>");
+
+        }
+
+        return sb.toString();
     }
 
 }

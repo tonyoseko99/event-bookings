@@ -12,22 +12,27 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 
 import com.tonnyseko.servlet.app.bean.EventBean;
+import com.tonnyseko.servlet.app.model.view.CategoryStatus;
 import com.tonnyseko.servlet.app.view.html.AppPage;
 
-@WebServlet("/categories?category=tech")
-public class Tech extends HttpServlet{
+@WebServlet("/TECH")
+public class Tech extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
 
         if (StringUtils.isNotBlank((String) session.getAttribute("loggedInId"))) {
-            EventBean bookingBean = new EventBean();
-
-            new AppPage().renderHtml(request, response, 0,
-                    bookingBean.sortPerCategory());
+            EventBean eventBean = new EventBean();
+            String categoryParam = request.getParameter("category");
+            
+            if (categoryParam != null) {
+                CategoryStatus category = CategoryStatus.valueOf(categoryParam.toUpperCase());
+                new AppPage().renderHtml(request, response, 0, eventBean.sortPerCategory(category));
+            } else {
+                // Handle the case when no category is selected
+                response.sendRedirect("./categories");
+            }
         } else {
             response.sendRedirect("./");
         }
-
     }
 }
