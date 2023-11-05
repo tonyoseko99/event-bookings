@@ -1,6 +1,7 @@
 package com.tonnyseko.servlet.action;
 
 import com.tonnyseko.servlet.app.bean.EventBean;
+import com.tonnyseko.servlet.app.model.view.CategoryStatus;
 import com.tonnyseko.servlet.app.view.html.AppPage;
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/categories")
 public class Categories extends HttpServlet {
@@ -19,10 +21,8 @@ public class Categories extends HttpServlet {
         HttpSession session = request.getSession();
 
         if(StringUtils.isNotBlank((String) session.getAttribute("loggedInId"))){
-            EventBean bookingBean = new EventBean();
-
             new AppPage().renderHtml(request, response, 2,
-                    "<h2>Categories</h2" + bookingBean.listOfBookings());
+                    "<h2>Categories</h2");
         } else {
             response.sendRedirect("./");
         }

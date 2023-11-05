@@ -54,22 +54,24 @@ public class EventBean implements EventInterface, Serializable {
 
         StringBuilder sb = new StringBuilder();
         if (!events.isEmpty()) {
-            Event event = events.get(2);
+            Event event = events.get(5);
             sb.append("<div class=\"main-page-feature\">");
 
             sb.append("<img src=\"").append(event.getImage()).append("\" alt=\"").append(event.getName())
                     .append("\" style=\"width:100%\">");
             sb.append("<h2>").append(event.getName()).append("</h2>");
-            sb.append("<div>");
-            sb.append("<p>").append("Venue: ").append(event.getVenue()).append("</p>");
-            sb.append("<p>").append("Date: ").append(event.getDate()).append("</p>");
-            sb.append("<p>").append("Time: ").append(event.getTime()).append("</p>");
-            sb.append("<p>").append("Guests: ").append(event.getGuests()).append("</p>");
-            sb.append("<p>").append("Description: ").append(event.getDescription()).append("</p>");
-            sb.append("</div>");
             sb.append("</div>");
         }
 
+        sb.append("<div class=\"main-page-feature\">");
+        sb.append("<a href=\"./events\" class=\"btn btn-primary\">View All Events</a>");
+        sb.append("</div>");
+        sb.append("<div class=\"main-page-feature\">");
+        sb.append("<a href=\"./categories\" class=\"btn btn-primary\">View Categories</a>");
+        sb.append("</div>");
+
         return sb.toString();
     }
+
+  
 }
