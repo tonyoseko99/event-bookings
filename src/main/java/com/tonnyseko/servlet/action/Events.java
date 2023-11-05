@@ -1,6 +1,7 @@
 package com.tonnyseko.servlet.action;
 
 import com.tonnyseko.servlet.app.bean.EventBean;
+import com.tonnyseko.servlet.app.model.view.CategoryStatus;
 import com.tonnyseko.servlet.app.view.html.AppPage;
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,11 +25,12 @@ public class Events extends HttpServlet {
             String date = request.getParameter("event_date");
             String venue = request.getParameter("event_location");
             String time = request.getParameter("event_time");
-            String guests = request.getParameter("event_guests");
+            CategoryStatus category = CategoryStatus.valueOf(request.getParameter("event_category"));
             String description = request.getParameter("event_description");
 
             EventBean eventBean = new EventBean();
-            eventBean.addEvent(name, image, venue, date, time, guests, description);
+            eventBean.addEvent(name, image, venue, date, time, category, description);
+            
 
             response.sendRedirect("./events");
         } else {
@@ -56,8 +58,14 @@ public class Events extends HttpServlet {
                             "<input type='text' id='event_location' name='event_location'><br>" +
                             "<label for='event_time'>Event Time:</label><br>" +
                             "<input type='time' id='event_time' name='event_time'><br>" +
-                            "<label for='event_guests'>Event Guests:</label><br>" +
-                            "<input type='number' id='event_guests' name='event_guests'><br>" +
+                            "<label for='event_category'>Event Category:</label><br>" +
+                            "<select id='event_category' name='event_category'>" +
+                            "<option value='TECH'>Tech</option>" +
+                            "<option value='BUSINESS'>Business</option>" +
+                            "<option value='SPORTS'>Sports</option>" +
+                            "<option value='ENTERTAINMENT'>Entertainment</option>" +
+                            "<option value='OTHER'>Other</option>" +
+                            "</select><br>" +
                             "<label for='event_description'>Event Description:</label><br>" +
                             "<textarea id='event_description' name='event_description'></textarea><br><br>" +
                             "<input type='submit' value='Add Event'>" +

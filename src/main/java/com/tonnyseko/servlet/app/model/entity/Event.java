@@ -1,6 +1,9 @@
 package com.tonnyseko.servlet.app.model.entity;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.tonnyseko.servlet.app.model.view.CategoryStatus;
+
 import java.io.Serializable;
 
 public class Event implements Serializable {
@@ -10,21 +13,21 @@ public class Event implements Serializable {
     private String venue;
     private String date;
     private String time;
-    private String guests;
+    private CategoryStatus category;
     private String description;
 
     public Event() {
 
     }
 
-    public Event(String name, String image, String venue, String date, String time, String guests, String description) {
+    public Event(String name, String image, String venue, String date, String time, CategoryStatus category, String description) {
         super();
         this.name = name;
         this.image = image;
         this.venue = venue;
         this.date = date;
         this.time = time;
-        this.guests = guests;
+        this.category = category;
         this.description = description;
     }
 
@@ -48,8 +51,8 @@ public class Event implements Serializable {
         return time;
     }
 
-    public String getGuests() {
-        return guests;
+    public CategoryStatus getCategory() {
+        return category;
     }
 
     public String getDescription() {
@@ -65,7 +68,7 @@ public class Event implements Serializable {
         listBuilder.append("<li>Venue: ").append(StringUtils.trimToEmpty(getVenue())).append("</li>");
         listBuilder.append("<li>Date: ").append(StringUtils.trimToEmpty(getDate())).append("</li>");
         listBuilder.append("<li>Time: ").append(StringUtils.trimToEmpty(getTime())).append("</li>");
-        listBuilder.append("<li>Guests: ").append(StringUtils.trimToEmpty(getGuests())).append("</li>");
+        listBuilder.append("<li>Category: ").append(StringUtils.trimToEmpty(getCategory().toString())).append("</li>");
         listBuilder.append("<li>Description: ").append(StringUtils.trimToEmpty(getDescription())).append("</li>");
         listBuilder.append("</ul>");
         return listBuilder.toString();
