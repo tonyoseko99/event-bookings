@@ -30,45 +30,33 @@ public class AppCss implements Serializable {
             "color: white;" +
         "}" +
 
-        "table {" +
-            "font-family: Arial, sans-serif;" +
-            "border-collapse: collapse;" +
-            "width: 100%;" +
-        "}" +
-
-        "td, th {" +
-            "border: 1px solid #dddddd;" +
-            "text-align: left;" +
-            "padding: 8px;" +
-        "}" +
-
-        "tr:nth-child(even) {" +
-            "background-color: #f2f2f2;" +
-        "}" +
-
-        ".card-section {" +
-            "padding: 2px 16px;" +
-            "display: flex;" +
-            "flex-direction: row;" +
-            "justify-content: center;" +
-            "align-items: center;" +
-            "flex-wrap: wrap;" +
-            "margin: 0 auto;" +
-            "width: 100%;" +
-            "max-width: 1200px;" +
-            "box-sizing: border-box;" +
-        "}" +
-
         ".card {" +
             "box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);" +
             "max-width: 300px;" +
             "margin: auto;" +
             "text-align: center;" +
             "font-family: Arial, sans-serif;" +
+            "background-color: #f1f1f1;" +
+            "border-radius: 5px;" +
+            "padding: 10px;" +
+            "display: flex;" +
+            "flex-direction: row;" +
+            "justify-content: center;" +
+            "align-items: center;" +
+            "margin-bottom: 10px;" +
+            "margin-top: 10px;" +
+            
         "}" +
 
         ".card-content {" +
             "padding: 2px 16px;" +
+        "}" +
+        ".app-name {" +
+            "text-align: center;" +
+            "font-family: Arial, sans-serif;" +
+            "font-size: 30px;" +
+            "color: #04AA6D;" +
+            "font-weight: bold;" +
         "}" +
 
         "</style>";

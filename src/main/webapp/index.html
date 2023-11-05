@@ -15,6 +15,7 @@
             font-family: "Arial", sans-serif;
             background-color: #f2f2f2;
             text-align: center;
+            height: 100vh;
         }
 
         input[type=text],
@@ -29,7 +30,7 @@
         }
 
         button {
-            background-color: #04AA6D;
+            background-color: #0077be;
             color: white;
             padding: 14px 20px;
             margin: 8px 0;
@@ -40,7 +41,7 @@
         }
 
         button:hover {
-            background-color: #21825C;
+            background-color: #005a8c;
         }
 
         .cancelbtn {
@@ -65,10 +66,12 @@
             width: 50%;
             border-radius: 4px;
             margin: 0 auto;
+            text-align: left;
         }
 
         h2 {
-            color: #04AA6D;
+            color: #0077be;
+            text-align: center;
         }
 
         span.psw {
@@ -76,10 +79,19 @@
             padding-top: 16px;
         }
 
+        form{
+            margin-top: 50px;
+
+        }
+        .login-form{
+            display: block;
+            margin: 0 auto;
+            width: 50%;
+        }
+
         /* Change styles for span and cancel button on extra small screens */
         @media screen and (max-width: 300px) {
             span.psw {
-                display: block;
                 float: none;
             }
 
@@ -92,45 +104,36 @@
 
 <body>
 
-    <h2>Events Booking Platform</h2>
+    <header>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <a class="navbar-brand" href="#">Events Booking Platform</a>
+        </nav>
+    </header>
 
-    <!-- <form action="./login" method="post">
+    <div class="login-form">
+        <h2>Login</h2>
 
-        <div class="container">
-            <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
+        <form action="./login" method="post">
 
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <div class="container">
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" required>
 
-            <button type="submit">Login</button>
-        </div>
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
 
-        <div class="container">
-            <span class="psw">New user? <a href="./registration">Register</a></span>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
+                <button type="submit">Login</button>
+            </div>
 
-    </form> -->
+            <div class="container">
+                <span class="psw">New user? <a href="./registration">Register</a></span>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
 
-    <h2>Login</h2>
+        </form>
+    </div>
 
-    <form action="./login" method="post">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
-        </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
-        <div class="container">
-            <span>New user? <a href="./registration" class="btn btn-primary">Register</a></span>
-            <span>Forgot <a href="#" class="btn btn-primary">password?</a></span>
-        </div>
-    </form>
 
 </body>
 

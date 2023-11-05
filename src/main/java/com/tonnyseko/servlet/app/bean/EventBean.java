@@ -46,4 +46,28 @@ public class EventBean implements EventInterface, Serializable {
         Database db = Database.getDbInstance();
         db.getEvents().add(new Event(name, image, venue, date, time, guests, description));
     }
+
+    public String getFeaturedEvent() {
+        List<Event> events = Database.getDbInstance().getEvents();
+
+        StringBuilder sb = new StringBuilder();
+        if (!events.isEmpty()) {
+            Event event = events.get(0);
+            sb.append("<div class=\"card-section\">");
+            sb.append("<div class=\"card\">");
+            sb.append("<div class=\"card-content\">");
+            sb.append("<img src=\"").append(event.getImage()).append("\" alt=\"").append(event.getName()).append("\" style=\"width:100%\">");
+            sb.append("<h2>").append(event.getName()).append("</h2>");
+            sb.append("<p>").append("Venue: ").append(event.getVenue()).append("</p>");
+            sb.append("<p>").append("Date: ").append(event.getDate()).append("</p>");
+            sb.append("<p>").append("Time: ").append(event.getTime()).append("</p>");
+            sb.append("<p>").append("Guests: ").append(event.getGuests()).append("</p>");
+            sb.append("<p>").append("Description: ").append(event.getDescription()).append("</p>");
+            sb.append("</div>");
+            sb.append("</div>");
+            sb.append("</div>");
+        }
+
+        return sb.toString();
+    }
 }

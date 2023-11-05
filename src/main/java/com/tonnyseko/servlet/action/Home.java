@@ -19,15 +19,15 @@ public class Home extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        if(StringUtils.isNotBlank((String) session.getAttribute("loggedInId"))){
+        if (StringUtils.isNotBlank((String) session.getAttribute("loggedInId"))) {
             EventBean bookingBean = new EventBean();
 
             new AppPage().renderHtml(request, response, 0,
-                    "<h2>List of Events</h2" + bookingBean.listOfBookings());
+                    bookingBean.listOfBookings());
         } else {
             response.sendRedirect("./");
         }
-        
+
     }
-    
+
 }
