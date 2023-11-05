@@ -22,7 +22,7 @@ public class Categories extends HttpServlet {
             EventBean bookingBean = new EventBean();
 
             new AppPage().renderHtml(request, response, 2,
-                    "<h2>List of Categories</h2" + bookingBean.listOfBookings());
+                    "<h2>Categories</h2" + bookingBean.listOfBookings());
         } else {
             response.sendRedirect("./");
         }

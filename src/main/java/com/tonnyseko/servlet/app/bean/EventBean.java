@@ -41,4 +41,9 @@ public class EventBean implements EventInterface, Serializable {
         Database db = Database.getDbInstance();
         db.getEvents().remove(event);
     }
+
+    public void addEvent(String name, String image, String venue, String date, String time, String guests, String description) {
+        Database db = Database.getDbInstance();
+        db.getEvents().add(new Event(name, image, venue, date, time, guests, description));
+    }
 }
