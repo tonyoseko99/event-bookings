@@ -1,4 +1,4 @@
-package com.tonnyseko.servlet.action;
+package com.tonnyseko.servlet.app.action;
 
 import com.tonnyseko.servlet.app.model.entity.User;
 import com.tonnyseko.servlet.database.Database;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/registration")
-public class Registration extends HttpServlet {
+public class RegistrationAction extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Database db = Database.getDbInstance();
