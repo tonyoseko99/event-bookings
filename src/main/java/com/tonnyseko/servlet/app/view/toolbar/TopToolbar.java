@@ -22,11 +22,21 @@ public class TopToolbar implements Menu, Serializable {
         this.activateLink(activeLinkIndex);
 
         String menubar = "<div class=\"topnav\">";
+        String leftMenu = "<div class=\"left\">";
+        String rightMenu = "<div class=\"right\">";
 
         for(MenuLink link : links)
-            menubar += "<a " + (link.getStatus() == MenuLinkStatus.ACTIVE? "class=\"active\"" : "")
-                    + " href=\"" + link.getUrl() + "\">" + link.getLabel() + "</a>";
-        menubar += "</div>";
+//            separate the logout link from the rest of the links using a div with class="right"
+            if(link.getLabel().equals("Logout"))
+                rightMenu += "<a href=\"" + link.getUrl() + "\" class=\"" + link.getStatus() + "\">" + link.getLabel() + "</a>";
+            else
+                leftMenu += "<a href=\"" + link.getUrl() + "\" class=\"" + link.getStatus() + "\">" + link.getLabel() + "</a>";
+
+        leftMenu += "</div>";
+        rightMenu += "</div>";
+
+        menubar += leftMenu + rightMenu + "</div>";
+
         return menubar;
     }
 

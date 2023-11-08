@@ -7,22 +7,28 @@ public class AppCss implements Serializable {
     private String style = "<style>" +
             ".topnav { " +
             "overflow: hidden;" +
-            "background-color: #333;" +
+            "background-color: #ddd;" +
+            "padding: 20px;" +
+            "display: flex;" +
+            "flex-direction: row;" +
+            "flex-wrap: wrap;" +
+            "justify-content: space-between;" +
+            "align-items: center;" +
             "}" +
             ".topnav a {" +
             "float: left;" +
-            "color: #f2f2f2;" +
+            "color: black;" +
             "text-align: center;" +
             "padding: 14px 16px;" +
             "text-decoration: none;" +
             "font-size: 17px;" +
             "}" +
             ".topnav a:hover {" +
-            "background-color: #ddd;" +
-            "color: black;" +
+            "background-color: black;" +
+            "color: #ddd;" +
             "}" +
             ".topnav a.active {" +
-            "background-color: #04AA6D;" +
+            "background-color: orange;" +
             "color: white;" +
             "}" +
             ".card-section {" +
