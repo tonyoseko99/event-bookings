@@ -29,7 +29,7 @@ public class AuthFilter implements Filter {
         if (httpSession.isNew()) {
             httpSession.invalidate();
 
-            if (servletPath.equals("/login") || servletPath.equals("/index.html")) {
+            if (servletPath.equals("/login") || servletPath.equals("/index.html") || servletPath.equals("/registration")) {
                 chain.doFilter(request, response);
             } else {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/");
