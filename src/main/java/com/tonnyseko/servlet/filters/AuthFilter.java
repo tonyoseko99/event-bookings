@@ -26,10 +26,10 @@ public class AuthFilter implements Filter {
         String servletPath = httpRequest.getServletPath();
         System.out.println(servletPath);
 
-        if (httpSession.isNew()) {
+        if (httpSession.isNew() || StringUtils.isBlank((String) httpSession.getAttribute("loggedInId"))) {
             httpSession.invalidate();
 
-            if (servletPath.equals("/login") || servletPath.equals("/index.html") || servletPath.equals("/registration")) {
+            if (servletPath.equals("/login") || servletPath.contains(".jsp") || servletPath.equals("/registration")) {
                 chain.doFilter(request, response);
             } else {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/");

@@ -1,7 +1,7 @@
 package com.tonnyseko.servlet.app.action;
 
 import com.tonnyseko.servlet.app.bean.EventBean;
-import com.tonnyseko.servlet.app.view.html.AppPage;
+import com.tonnyseko.servlet.app.view.helper.AppPage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

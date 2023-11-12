@@ -45,7 +45,7 @@ public class EventBean implements EventInterface, Serializable {
     }
 
     public void addEvent(String name, String image, String venue, String date, String time, CategoryStatus category,
-                         String description) {
+            String description) {
         Database db = Database.getDbInstance();
         db.getEvents().add(new Event(name, image, venue, date, time, category, description));
     }
@@ -57,21 +57,6 @@ public class EventBean implements EventInterface, Serializable {
         if (!events.isEmpty()) {
             Event event = events.get(5);
 
-//            // Create the left side of the container
-//            sb.append("<div class=\"container\">");
-//            sb.append("<div class=\"left-side\">");
-//            sb.append("<h1>Welcome to Our Events Booking Platform</h1>");
-//            sb.append("<p>Discover and book amazing events near you. Don't miss out!</p>");
-//            sb.append("<a href=\"#\" class=\"btn\">View Events</a>");
-//            sb.append("</div>");
-//
-//// Create the right side of the container with an image
-//            sb.append("<div class=\"right-side\">");
-//            sb.append("<img src=\"event_image.jpg\" alt=\"Event Image\">");
-//            sb.append("</div>");
-//            sb.append("</div>");
-
-
             sb.append("<div class=\"main-page-feature\">");
 
             sb.append("<img src=\"").append(event.getImage()).append("\" alt=\"").append(event.getName())
@@ -82,9 +67,6 @@ public class EventBean implements EventInterface, Serializable {
 
         sb.append("<div class=\"main-page-feature\">");
         sb.append("<a href=\"./events\" class=\"btn btn-primary\">View All Events</a>");
-        sb.append("</div>");
-        sb.append("<div class=\"main-page-feature\">");
-        sb.append("<a href=\"./categories\" class=\"btn btn-primary\">View Categories</a>");
         sb.append("</div>");
 
         return sb.toString();
