@@ -1,7 +1,7 @@
 package com.tonnyseko.servlet.app.view.helper;
 
 import com.tonnyseko.servlet.app.view.css.AppCss;
-import com.tonnyseko.servlet.app.view.toolbar.TopToolbar;
+
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +16,21 @@ public class AppPage implements Serializable {
                 
                 ServletContext context = req.getServletContext();
                 PrintWriter print = res.getWriter();
+                print.write("<!DOCTYPE html>" +
+                        "<html>" +
+                        "<head>" +
+                        new AppCss().getStyle() +
+                        "</head>" +
+                        "<body>" +
 
+                        new TopToolbar().menu(activeMenu) +
 
+                        "<h3 class=\"app-name\">" + context.getInitParameter("AppName") + "<h3>");
+
+                print.write("<div class=\"content\">" + content + "</div>");
+
+                print.write(
+                        "</body>" +
+                                "</html>");
         }
 }

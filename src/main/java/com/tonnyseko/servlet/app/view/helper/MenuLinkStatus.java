@@ -1,4 +1,4 @@
-package com.tonnyseko.servlet.app.model.view;
+package com.tonnyseko.servlet.app.view.helper;
 
 public enum MenuLinkStatus {
     ACTIVE,

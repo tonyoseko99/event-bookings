@@ -1,8 +1,8 @@
-package com.tonnyseko.servlet.app.view.toolbar;
+package com.tonnyseko.servlet.app.view.helper;
 
 import com.tonnyseko.servlet.app.model.view.CategoryStatus;
-import com.tonnyseko.servlet.app.model.view.MenuLink;
-import com.tonnyseko.servlet.app.model.view.MenuLinkStatus;
+import com.tonnyseko.servlet.app.view.helper.MenuLink;
+import com.tonnyseko.servlet.app.view.helper.MenuLinkStatus;
 
 import java.io.Serializable;
 import java.util.ArrayList;
