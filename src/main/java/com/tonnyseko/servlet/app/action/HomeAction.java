@@ -14,12 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeAction extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         EventBean bookingBean = new EventBean();
 
         new AppPage().renderHtml(request, response, 0,
                 bookingBean.getFeaturedEvent());
-
 
     }
 

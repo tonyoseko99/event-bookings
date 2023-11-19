@@ -1,13 +1,9 @@
 package com.tonnyseko.servlet.auth;
 
-import com.tonnyseko.servlet.app.model.entity.User;
+import com.tonnyseko.servlet.app.model.User;
 import com.tonnyseko.servlet.database.Database;
-import org.apache.commons.lang3.StringUtils;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +18,14 @@ public class Login extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        if(StringUtils.isNotBlank((String) session.getAttribute("loggedInId")))
-            resp.sendRedirect("./home");
-        else
-            resp.sendRedirect("./");
+        if (session.getAttribute("loggedInId") != null) {
+            resp.sendRedirect(req.getContextPath() + "/events");
+        } else {
+            resp.sendRedirect(req.getContextPath() + "/");
+        }
     }
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
@@ -41,13 +38,12 @@ public class Login extends HttpServlet {
                 session.setAttribute("loggedInId", new Date().getTime() + "");
                 session.setAttribute("username", username);
 
-                resp.sendRedirect("./home");
-
+                resp.sendRedirect(req.getContextPath() + "/events");
+                return;  // Add this to exit the method after redirecting
             }
         }
 
         PrintWriter print = resp.getWriter();
         print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
-
     }
 }

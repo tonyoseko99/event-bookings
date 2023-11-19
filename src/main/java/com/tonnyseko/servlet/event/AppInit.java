@@ -1,7 +1,7 @@
 package com.tonnyseko.servlet.event;
 
-import com.tonnyseko.servlet.app.model.entity.Event;
-import com.tonnyseko.servlet.app.model.entity.User;
+import com.tonnyseko.servlet.app.model.Event;
+import com.tonnyseko.servlet.app.model.User;
 import com.tonnyseko.servlet.app.model.view.CategoryStatus;
 import com.tonnyseko.servlet.database.Database;
 

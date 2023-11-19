@@ -1,6 +1,7 @@
 package com.tonnyseko.servlet.app.action;
 
 import com.tonnyseko.servlet.app.bean.EventBean;
+import com.tonnyseko.servlet.app.model.Event;
 import com.tonnyseko.servlet.app.model.view.CategoryStatus;
 import com.tonnyseko.servlet.app.view.helper.AppPage;
 import javax.servlet.ServletException;
@@ -11,7 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/events")
-public class EventsAction extends HttpServlet {
+public class EventsAction extends BaseAction {
+    private static final String EVENT_NAME_PARAM = "event_name";
+    private static final String EVENT_IMAGE_PARAM = "event_image";
+    private static final String EVENT_DATE_PARAM = "event_date";
+    private static final String EVENT_LOCATION_PARAM = "event_location";
+    private static final String EVENT_TIME_PARAM = "event_time";
+    private static final String EVENT_CATEGORY_PARAM = "event_category";
+    private static final String EVENT_DESCRIPTION_PARAM = "event_description";
+
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -31,20 +40,10 @@ public class EventsAction extends HttpServlet {
 
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         EventBean bookingBean = new EventBean();
 
-        new AppPage().renderHtml(request, response, 1,
-
-                "<button class=\"btn btn-primary\" id=\"add-event\"> <a href=\"./add-event\">Add Event</a></button>" +
-                        "<br><br>"
-
-                        +
-
-                        bookingBean.listOfBookings());
-
+        renderPage(request, response, 1, Event.class, bookingBean.listOfBookings());
 
     }
 }

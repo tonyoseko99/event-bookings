@@ -1,7 +1,7 @@
 package com.tonnyseko.servlet.database;
 
-import com.tonnyseko.servlet.app.model.entity.Event;
-import com.tonnyseko.servlet.app.model.entity.User;
+import com.tonnyseko.servlet.app.model.Event;
+import com.tonnyseko.servlet.app.model.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;

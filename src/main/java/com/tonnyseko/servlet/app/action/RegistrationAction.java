@@ -1,6 +1,6 @@
 package com.tonnyseko.servlet.app.action;
 
-import com.tonnyseko.servlet.app.model.entity.User;
+import com.tonnyseko.servlet.app.model.User;
 import com.tonnyseko.servlet.database.Database;
 
 import javax.servlet.ServletException;
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/registration")
 public class RegistrationAction extends HttpServlet {

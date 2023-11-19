@@ -1,19 +1,41 @@
-package com.tonnyseko.servlet.app.model.entity;
+package com.tonnyseko.servlet.app.model;
 
+import com.tonnyseko.servlet.app.utils.AnnotationsPreProcessor;
+import com.tonnyseko.servlet.app.view.helper.HtmlCard;
+import com.tonnyseko.servlet.app.view.helper.HtmlForm;
+import com.tonnyseko.servlet.app.view.helper.HtmlFormField;
+import com.tonnyseko.servlet.database.helper.DbColumn;
 import org.apache.commons.lang3.StringUtils;
 
 import com.tonnyseko.servlet.app.model.view.CategoryStatus;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 
+@HtmlCard(url = "/events?action=add")
+@HtmlForm(label = "Add Event", url = "/events")
 public class Event implements Serializable {
 
+    @DbColumn(columnName = "name")
+    @HtmlFormField(label = "Name", name = "name")
     private String name;
+    @DbColumn(columnName = "image")
+    @HtmlFormField(label = "Image", name = "image")
     private String image;
+    @DbColumn(columnName = "venue")
+    @HtmlFormField(label = "Venue", name = "venue")
     private String venue;
+    @DbColumn(columnName = "date")
+    @HtmlFormField(label = "Date", name = "date")
     private String date;
+    @DbColumn(columnName = "time")
+    @HtmlFormField(label = "Time", name = "time")
     private String time;
+    @DbColumn(columnName = "category")
+    @HtmlFormField(label = "Category", name = "category")
     private CategoryStatus category;
+    @DbColumn(columnName = "description")
+    @HtmlFormField(label = "Description", name = "description")
     private String description;
 
     public Event() {
@@ -63,13 +85,15 @@ public class Event implements Serializable {
     public String listStrings() {
         StringBuilder listBuilder = new StringBuilder();
         listBuilder.append("<ul>");
-        listBuilder.append("<li>Name: ").append(StringUtils.trimToEmpty(getName())).append("</li>");
-        listBuilder.append("<li>Image: ").append(StringUtils.trimToEmpty(getImage())).append("</li>");
-        listBuilder.append("<li>Venue: ").append(StringUtils.trimToEmpty(getVenue())).append("</li>");
-        listBuilder.append("<li>Date: ").append(StringUtils.trimToEmpty(getDate())).append("</li>");
-        listBuilder.append("<li>Time: ").append(StringUtils.trimToEmpty(getTime())).append("</li>");
-        listBuilder.append("<li>Category: ").append(StringUtils.trimToEmpty(getCategory().toString())).append("</li>");
-        listBuilder.append("<li>Description: ").append(StringUtils.trimToEmpty(getDescription())).append("</li>");
+
+        Class<?> clazz = getClass();
+        listBuilder.append(AnnotationsPreProcessor.processHtmlCardAnnotations(clazz));
+        listBuilder.append(AnnotationsPreProcessor.processHtmlFormAnnotations(clazz));
+
+        for (Field field : clazz.getDeclaredFields()) {
+            listBuilder.append(AnnotationsPreProcessor.processHtmlFormFieldAnnotations(field));
+        }
+
         listBuilder.append("</ul>");
         return listBuilder.toString();
     }
