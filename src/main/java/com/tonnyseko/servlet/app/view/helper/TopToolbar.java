@@ -1,14 +1,14 @@
 package com.tonnyseko.servlet.app.view.helper;
 
 import com.tonnyseko.servlet.app.model.view.CategoryStatus;
-import com.tonnyseko.servlet.app.view.helper.MenuLink;
-import com.tonnyseko.servlet.app.view.helper.MenuLinkStatus;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TopToolbar implements Menu, Serializable {
+    private int activeLinkIndex = 0;
+
     private final List<MenuLink> links = new ArrayList<>();
 
     {
@@ -26,6 +26,14 @@ public class TopToolbar implements Menu, Serializable {
         categories.add(CategoryStatus.TECH);
         categories.add(CategoryStatus.ENTERTAINMENT);
         categories.add(CategoryStatus.OTHER);
+    }
+
+    public int getActiveLinkIndex() {
+        return activeLinkIndex;
+    }
+
+    public void setActiveLinkIndex(int activeLinkIndex) {
+        this.activeLinkIndex = activeLinkIndex;
     }
 
     @Override
@@ -76,3 +84,4 @@ public class TopToolbar implements Menu, Serializable {
         }
     }
 }
+

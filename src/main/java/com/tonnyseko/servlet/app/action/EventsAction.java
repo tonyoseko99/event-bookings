@@ -1,49 +1,32 @@
 package com.tonnyseko.servlet.app.action;
 
 import com.tonnyseko.servlet.app.bean.EventBean;
-import com.tonnyseko.servlet.app.model.Event;
-import com.tonnyseko.servlet.app.model.view.CategoryStatus;
-import com.tonnyseko.servlet.app.view.helper.AppPage;
+import com.tonnyseko.servlet.app.model.entity.Event;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/events")
 public class EventsAction extends BaseAction {
-    private static final String EVENT_NAME_PARAM = "event_name";
-    private static final String EVENT_IMAGE_PARAM = "event_image";
-    private static final String EVENT_DATE_PARAM = "event_date";
-    private static final String EVENT_LOCATION_PARAM = "event_location";
-    private static final String EVENT_TIME_PARAM = "event_time";
-    private static final String EVENT_CATEGORY_PARAM = "event_category";
-    private static final String EVENT_DESCRIPTION_PARAM = "event_description";
-
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-        String name = request.getParameter("event_name");
-        String image = request.getParameter("event_image");
-        String date = request.getParameter("event_date");
-        String venue = request.getParameter("event_location");
-        String time = request.getParameter("event_time");
-        CategoryStatus category = CategoryStatus.valueOf(request.getParameter("event_category"));
-        String description = request.getParameter("event_description");
-
         EventBean eventBean = new EventBean();
-        eventBean.addEvent(name, image, venue, date, time, category, description);
-
+        Class<Event> event = serializeForm(Event.class, request.getParameterMap());
+        eventBean.addOrUpdate(event);
         response.sendRedirect("./events");
 
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EventBean bookingBean = new EventBean();
+        
 
-        renderPage(request, response, 1, Event.class, bookingBean.listOfBookings());
+        renderPage(request, response, 1, Event.class, bookingBean.list());
 
     }
 }

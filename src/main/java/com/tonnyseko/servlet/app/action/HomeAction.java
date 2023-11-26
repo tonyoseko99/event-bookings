@@ -1,6 +1,7 @@
 package com.tonnyseko.servlet.app.action;
 
 import com.tonnyseko.servlet.app.bean.EventBean;
+import com.tonnyseko.servlet.app.model.entity.Event;
 import com.tonnyseko.servlet.app.view.helper.AppPage;
 import java.io.IOException;
 
@@ -11,13 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/home")
-public class HomeAction extends HttpServlet {
+public class HomeAction extends BaseAction {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         EventBean bookingBean = new EventBean();
 
-        new AppPage().renderHtml(request, response, 0,
-                bookingBean.getFeaturedEvent());
+        renderPage(request, response, 1, Event.class, bookingBean.getFeaturedEvent());
 
     }
 

@@ -9,4 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DbColumn {
     String columnName();
+    String definition() default "VARCHAR(255)";
 }

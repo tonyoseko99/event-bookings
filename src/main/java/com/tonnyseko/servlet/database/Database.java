@@ -1,43 +1,38 @@
 package com.tonnyseko.servlet.database;
 
-import com.tonnyseko.servlet.app.model.Event;
-import com.tonnyseko.servlet.app.model.User;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Database implements Serializable {
-    private List<Event> events = new ArrayList<>();
-    private List<User> users = new ArrayList<>();
+    private List<Object> data = new ArrayList<>();
     private static Database dbInstance;
 
-    public Database() {}
+    private Database() {
+    }
+
     public static Database getDbInstance() {
-        if(dbInstance == null) {
+        if (dbInstance == null) {
             dbInstance = new Database();
-            System.out.println("Database instance created");
+
         }
+
         return dbInstance;
     }
 
-    public List<Event> getEvents() {
-        return events;
+    public List<Object> getData() {
+        return data;
     }
 
-    public void setEvents(List<Event> events) {
-        if(events != null) {
-            this.events = events;
-        }
+    public void setData(List<Object> data) {
+        this.data = data;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        if(users != null) {
-            this.users = users;
-        }
+    public List<Object> getData(Class<?> clazz) {
+        return data
+                .stream()
+                .filter(clazz::isInstance)
+                .collect(Collectors.toList());
     }
 }
