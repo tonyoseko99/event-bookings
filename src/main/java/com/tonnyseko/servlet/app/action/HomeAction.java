@@ -2,7 +2,6 @@ package com.tonnyseko.servlet.app.action;
 
 import com.tonnyseko.servlet.app.bean.EventBean;
 import com.tonnyseko.servlet.app.model.entity.Event;
-import com.tonnyseko.servlet.app.view.helper.AppPage;
 import java.io.IOException;
 
 import javax.servlet.ServletException;

@@ -1,12 +1,9 @@
 package com.tonnyseko.servlet.app.model.entity;
 
-import com.tonnyseko.servlet.app.action.BaseAction;
 import com.tonnyseko.servlet.app.view.helper.HtmlForm;
 import com.tonnyseko.servlet.app.view.helper.HtmlFormField;
 import com.tonnyseko.servlet.database.helper.DbColumn;
 import com.tonnyseko.servlet.database.helper.DbTable;
-
-import java.io.Serializable;
 
 @DbTable(tableName = "users")
 @HtmlForm(label = "Add User", url = "/registration", httpMethod = "POST")
@@ -19,7 +16,9 @@ public class User extends BaseEntity {
     private String password;
 
     private String confirmPassword;
-    public User() {}
+
+    public User() {
+    }
 
     public String getConfirmPassword() {
         return confirmPassword;

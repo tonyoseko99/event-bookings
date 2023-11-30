@@ -2,7 +2,6 @@
 package com.tonnyseko.servlet.app.view.helper;
 
 import com.tonnyseko.servlet.app.model.entity.Event;
-import com.tonnyseko.servlet.app.model.view.CategoryStatus;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
@@ -59,7 +58,7 @@ public class HtmlCpmRender implements Serializable {
                 "<form action=\"" + htmlFormMarker.url() + "\" method=\"" + htmlFormMarker.httpMethod() + "\">" +
                 "<div class=\"container\">");
 
-        Field [] fields = model.getDeclaredFields();
+        Field[] fields = model.getDeclaredFields();
 
         for (Field field : fields) {
             if (!field.isAnnotationPresent(HtmlFormField.class))
@@ -72,14 +71,14 @@ public class HtmlCpmRender implements Serializable {
             htmlForm
                     .append("<label for=\"").append(ifBlank(formField.labelFor(), fieldName)).append("\">")
                     .append(ifBlank(formField.label(), fieldName))
-                    .append(formField.required()?"<span style=\"color:red;\">*</span> ":"")
+                    .append(formField.required() ? "<span style=\"color:red;\">*</span> " : "")
                     .append(":</label><br>");
 
             htmlForm.append("<input type=\"")
                     .append(formField.type())
                     .append("\" id=\"").append(ifBlank(formField.id(), fieldName))
                     .append("\" name=\"").append(ifBlank(formField.name(), fieldName)).append("\" ")
-                    .append(formField.required()?"required" : "")
+                    .append(formField.required() ? "required" : "")
                     .append("><br>");
 
         }
@@ -90,7 +89,8 @@ public class HtmlCpmRender implements Serializable {
         return htmlForm.toString();
 
     }
-    private static String ifBlank(String target, String alternative){
-        return StringUtils.isBlank(target)? alternative : StringUtils.trimToEmpty(target);
+
+    private static String ifBlank(String target, String alternative) {
+        return StringUtils.isBlank(target) ? alternative : StringUtils.trimToEmpty(target);
     }
 }

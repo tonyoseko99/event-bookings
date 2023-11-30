@@ -24,8 +24,6 @@ public class EventsAction extends BaseAction {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EventBean bookingBean = new EventBean();
-        
-
         renderPage(request, response, 1, Event.class, bookingBean.list());
 
     }

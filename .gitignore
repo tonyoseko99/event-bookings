@@ -17,6 +17,7 @@
 target/
 out/
 build/
+data/
 
 # Ignore operating system and editor backup files
 .DS_Store

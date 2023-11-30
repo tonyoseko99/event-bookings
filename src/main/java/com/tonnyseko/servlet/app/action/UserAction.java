@@ -14,8 +14,6 @@ import java.sql.SQLException;
 
 @WebServlet("/registration")
 public class UserAction extends BaseAction {
-
-
     UserBeanI userBean = new UserBean();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

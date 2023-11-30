@@ -1,19 +1,12 @@
 package com.tonnyseko.servlet.app.model.entity;
 
-import com.tonnyseko.servlet.app.utils.AnnotationsPreProcessor;
 import com.tonnyseko.servlet.app.view.helper.HtmlCard;
 import com.tonnyseko.servlet.app.view.helper.HtmlForm;
 import com.tonnyseko.servlet.app.view.helper.HtmlFormField;
 import com.tonnyseko.servlet.database.helper.DbColumn;
 import com.tonnyseko.servlet.database.helper.DbTable;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.tonnyseko.servlet.app.model.view.CategoryStatus;
-
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.Date;
 
 @DbTable(tableName = "bookings")
 @HtmlCard(url = "/events?action=add")
@@ -85,20 +78,4 @@ public class Event extends BaseEntity {
         return description;
     }
 
-    // create a stringbuilder to append the booking details in a list html format
-    public String listStrings() {
-        StringBuilder listBuilder = new StringBuilder();
-        listBuilder.append("<ul>");
-
-        Class<?> clazz = getClass();
-        listBuilder.append(AnnotationsPreProcessor.processHtmlCardAnnotations(clazz));
-        listBuilder.append(AnnotationsPreProcessor.processHtmlFormAnnotations(clazz));
-
-        for (Field field : clazz.getDeclaredFields()) {
-            listBuilder.append(AnnotationsPreProcessor.processHtmlFormFieldAnnotations(field));
-        }
-
-        listBuilder.append("</ul>");
-        return listBuilder.toString();
-    }
 }
