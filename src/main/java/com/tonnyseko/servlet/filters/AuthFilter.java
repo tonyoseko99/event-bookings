@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/*") // This will filter all the requests
+@WebFilter(urlPatterns = "/*") // This will filter all the requests
 public class AuthFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -30,6 +30,7 @@ public class AuthFilter implements Filter {
             httpSession.invalidate();
 
             if (servletPath.equals("/login") || servletPath.contains(".jsp") || servletPath.equals("/registration")) {
+                System.out.println("Filtering: " + servletPath);
                 chain.doFilter(request, response);
             } else {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/");

@@ -1,9 +1,9 @@
 package com.tonnyseko.servlet.app.action;
 
-import com.tonnyseko.servlet.app.bean.UserBean;
 import com.tonnyseko.servlet.app.bean.UserBeanI;
 import com.tonnyseko.servlet.app.model.entity.User;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,8 @@ import java.sql.SQLException;
 
 @WebServlet("/registration")
 public class UserAction extends BaseAction {
-    UserBeanI userBean = new UserBean();
+    @Inject
+    private UserBeanI userBean;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("./register.jsp");
@@ -22,8 +23,7 @@ public class UserAction extends BaseAction {
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User registerUser = new User();
-        registerUser = serializeForm(registerUser, req.getParameterMap());
+        User registerUser = serializeForm(User.class, req.getParameterMap());
 
         try {
             if (userBean.register(registerUser)) {

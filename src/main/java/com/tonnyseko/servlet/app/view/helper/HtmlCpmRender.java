@@ -13,9 +13,9 @@ public class HtmlCpmRender implements Serializable {
     public static String card(List<Event> events) {
         StringBuilder sb = new StringBuilder();
 
-//        add a button to add new event
+        // Add a button to add new event
         sb.append("<div class=\"add-event\">");
-        sb.append("<a href=\"/event/add\" class=\"add-event-btn\">Add Event</a>");
+        sb.append("<a href=\"/events?action=add\" class=\"add-event-btn\">Add Event</a>");
         sb.append("</div>");
 
         sb.append("<div class=\"event-card\">");
@@ -46,7 +46,7 @@ public class HtmlCpmRender implements Serializable {
 
 
     public static String form(Class<?> model) {
-
+ 
         HtmlForm htmlFormMarker = null;
         if (model.isAnnotationPresent(HtmlForm.class))
             htmlFormMarker = model.getAnnotation(HtmlForm.class);

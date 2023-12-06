@@ -1,0 +1,7 @@
+[server1]
+35.184.117.45
+[server1:vars]
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+ansible_user=tonny
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+UserKnownHostsFile=/dev/nullo

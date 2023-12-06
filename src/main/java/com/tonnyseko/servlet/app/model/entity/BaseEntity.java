@@ -3,11 +3,16 @@ package com.tonnyseko.servlet.app.model.entity;
 import com.tonnyseko.servlet.database.helper.DbColumn;
 import com.tonnyseko.servlet.database.helper.DbTableId;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
+@MappedSuperclass
 public class BaseEntity implements Serializable {
-    @DbTableId
-    @DbColumn(columnName = "id", definition = "BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT")
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     public Long getId() {

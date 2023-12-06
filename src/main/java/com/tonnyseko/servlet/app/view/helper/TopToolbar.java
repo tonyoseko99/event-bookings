@@ -23,7 +23,7 @@ public class TopToolbar implements Menu, Serializable {
     {
         categories.add(CategoryStatus.BUSINESS);
         categories.add(CategoryStatus.SPORTS);
-        categories.add(CategoryStatus.TECH);
+        categories.add(CategoryStatus.TECHNOLOGY);
         categories.add(CategoryStatus.ENTERTAINMENT);
         categories.add(CategoryStatus.OTHER);
     }

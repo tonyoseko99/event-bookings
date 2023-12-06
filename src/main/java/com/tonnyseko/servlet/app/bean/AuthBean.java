@@ -1,28 +1,42 @@
 package com.tonnyseko.servlet.app.bean;
 
 import com.tonnyseko.servlet.app.model.entity.User;
-import com.tonnyseko.servlet.database.MySqlDB;
+import com.tonnyseko.servlet.app.utility.HashText;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class AuthBean implements AuthBeanI, Serializable {
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+@Stateless
+public class AuthBean implements AuthBeanI, Serializable {
+    @PersistenceContext
+    private EntityManager database;
+    @Inject
+    private HashText hashText;
 
     @Override
     public User authenticate(User loginUser) {
+
         try {
-            MySqlDB database = MySqlDB.getInstance();
-            List<User> users = MySqlDB.select(User.class);
-            for (User user : users) {
-                if (user.getUsername().equals(loginUser.getUsername()) && user.getPassword().equals(loginUser.getPassword())) {
-                    return user;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            loginUser.setPassword(hashText.hash(loginUser.getPassword()));
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage());
         }
 
-        return null;
+        List<User> users = database.createQuery("FROM User u WHERE u.password=:password AND u.username=:username", User.class)
+                .setParameter("password", loginUser.getPassword())
+                .setParameter("username", loginUser.getUsername())
+                .getResultList();
+
+        if (!users.isEmpty()) {
+            return users.get(0);
+        } else {
+            throw new RuntimeException("Invalid username or password");
+        }
+
     }
 }

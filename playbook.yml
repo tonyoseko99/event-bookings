@@ -1,0 +1,24 @@
+- name: Events Platform deployment on GCP VM instance with Ansible 
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Recursively change ownership of a directory
+      file:
+        path: /home/tonny/Event
+        state: directory
+        recurse: yes
+        owner: tonny
+    - name: Scan the host keys
+      shell: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+    - name: Clone the repository
+      git:
+        key_file: ~/.ssh/id_rsa
+        repo:
+          - git@github.com:tonyoseko99/event-bookings.git
+        dest: /home/tonny/Event
+        version: main
+        update: yes
+        force: yes
+        accept_hostkey: yes
+    - name: Run docker-compose
+      command: docker-compose up -d

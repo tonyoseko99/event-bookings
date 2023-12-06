@@ -1,20 +1,22 @@
 package com.tonnyseko.servlet.app.model.entity;
 
-import com.tonnyseko.servlet.app.view.helper.HtmlForm;
-import com.tonnyseko.servlet.app.view.helper.HtmlFormField;
 import com.tonnyseko.servlet.database.helper.DbColumn;
 import com.tonnyseko.servlet.database.helper.DbTable;
 
-@DbTable(tableName = "users")
-@HtmlForm(label = "Add User", url = "/registration", httpMethod = "POST")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "users")
 public class User extends BaseEntity {
-    @DbColumn(columnName = "username")
-    @HtmlFormField(label = "Username", name = "username")
+    @Column(name = "username")
     private String username;
-    @DbColumn(columnName = "password")
-    @HtmlFormField(label = "Password", name = "password")
+    @Column(name = "password")
     private String password;
 
+    @Transient
     private String confirmPassword;
 
     public User() {
