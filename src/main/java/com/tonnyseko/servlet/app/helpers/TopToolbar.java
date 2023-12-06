@@ -1,6 +1,6 @@
-package com.tonnyseko.servlet.app.view.helper;
+package com.tonnyseko.servlet.app.helpers;
 
-import com.tonnyseko.servlet.app.model.view.CategoryStatus;
+import com.tonnyseko.servlet.app.model.enums.CategoryStatus;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,5 +1,4 @@
-package com.tonnyseko.servlet.app.view.helper;
-
+package com.tonnyseko.servlet.app.helpers;
 
 
 import java.io.Serializable;
@@ -8,7 +7,8 @@ public class MenuLink implements Serializable {
     private String url;
     private String label;
     private MenuLinkStatus status;
-    public MenuLink(String url, String label,MenuLinkStatus status){
+
+    public MenuLink(String url, String label, MenuLinkStatus status) {
         this.url = url;
         this.label = label;
         this.status = status;

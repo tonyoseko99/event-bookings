@@ -1,9 +1,9 @@
 <%@ page isELIgnored="false" %>
 <%-- <%@ page import="com.tonnyseko.servlet.app.bean.EventBean" %>
 <%@ page import="com.tonnyseko.servlet.app.model.Event" %>
-<%@ page import="com.tonnyseko.servlet.app.view.helper.HtmlCpmRender" %> --%>
+<%@ page import="com.tonnyseko.servlet.app.helpers.HtmlCpmRender" %> --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.tonnyseko.servlet.app.view.helper.TopToolbar" %>
+<%@ page import="com.tonnyseko.servlet.app.helpers.TopToolbar" %>
 
 
 <!DOCTYPE html>

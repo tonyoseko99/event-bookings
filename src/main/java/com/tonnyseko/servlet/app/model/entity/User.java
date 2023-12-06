@@ -1,8 +1,5 @@
 package com.tonnyseko.servlet.app.model.entity;
 
-import com.tonnyseko.servlet.database.helper.DbColumn;
-import com.tonnyseko.servlet.database.helper.DbTable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;

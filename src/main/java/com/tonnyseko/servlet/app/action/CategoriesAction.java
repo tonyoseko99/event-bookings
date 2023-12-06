@@ -2,7 +2,8 @@ package com.tonnyseko.servlet.app.action;
 
 import com.tonnyseko.servlet.app.bean.EventBean;
 import com.tonnyseko.servlet.app.model.entity.Event;
-import com.tonnyseko.servlet.app.model.view.CategoryStatus;
+import com.tonnyseko.servlet.app.model.enums.CategoryStatus;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;

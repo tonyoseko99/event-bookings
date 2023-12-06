@@ -1,4 +1,4 @@
-package com.tonnyseko.servlet.app.view.helper;
+package com.tonnyseko.servlet.app.helpers;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

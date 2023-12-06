@@ -1,5 +1,5 @@
 // HtmlCpmRender.java
-package com.tonnyseko.servlet.app.view.helper;
+package com.tonnyseko.servlet.app.helpers;
 
 import com.tonnyseko.servlet.app.model.entity.Event;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +15,7 @@ public class HtmlCpmRender implements Serializable {
 
         // Add a button to add new event
         sb.append("<div class=\"add-event\">");
-        sb.append("<a href=\"/events?action=add\" class=\"add-event-btn\">Add Event</a>");
+        sb.append("<a href=\"./events?action=add\" class=\"add-event-btn\">Add Event</a>");
         sb.append("</div>");
 
         sb.append("<div class=\"event-card\">");
@@ -46,7 +46,7 @@ public class HtmlCpmRender implements Serializable {
 
 
     public static String form(Class<?> model) {
- 
+
         HtmlForm htmlFormMarker = null;
         if (model.isAnnotationPresent(HtmlForm.class))
             htmlFormMarker = model.getAnnotation(HtmlForm.class);
@@ -74,12 +74,18 @@ public class HtmlCpmRender implements Serializable {
                     .append(formField.required() ? "<span style=\"color:red;\">*</span> " : "")
                     .append(":</label><br>");
 
-            htmlForm.append("<input type=\"")
-                    .append(formField.type())
-                    .append("\" id=\"").append(ifBlank(formField.id(), fieldName))
-                    .append("\" name=\"").append(ifBlank(formField.name(), fieldName)).append("\" ")
-                    .append(formField.required() ? "required" : "")
-                    .append("><br>");
+            if (field.getType().isEnum()) {
+                htmlForm.append("<select name=\"").append(fieldName).append("\">");
+                for (Object enumConstant : field.getType().getEnumConstants()) {
+                    htmlForm.append("<option value=\"").append(enumConstant).append("\">").append(enumConstant).append("</option>");
+                }
+                htmlForm.append("</select>");
+            } else {
+                htmlForm.append("<input type=\"").append(formField.type()).append("\" name=\"").append(fieldName).append("\"");
+                if (formField.required())
+                    htmlForm.append(" required");
+                htmlForm.append("><br>");
+            }
 
         }
 
