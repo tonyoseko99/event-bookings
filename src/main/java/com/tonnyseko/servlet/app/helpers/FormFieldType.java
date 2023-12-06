@@ -1,4 +1,4 @@
-package com.tonnyseko.servlet.app.view.helper;
+package com.tonnyseko.servlet.app.helpers;
 
 public enum FormFieldType {
     TEXT,

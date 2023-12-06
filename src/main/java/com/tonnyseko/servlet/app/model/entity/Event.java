@@ -1,56 +1,72 @@
 package com.tonnyseko.servlet.app.model.entity;
 
-import com.tonnyseko.servlet.app.view.helper.FormFieldType;
-import com.tonnyseko.servlet.app.view.helper.HtmlCard;
-import com.tonnyseko.servlet.app.view.helper.HtmlForm;
-import com.tonnyseko.servlet.app.view.helper.HtmlFormField;
+import com.tonnyseko.servlet.app.model.enums.CategoryStatus;
+import com.tonnyseko.servlet.app.helpers.FormFieldType;
+import com.tonnyseko.servlet.app.helpers.HtmlCard;
+import com.tonnyseko.servlet.app.helpers.HtmlForm;
+import com.tonnyseko.servlet.app.helpers.HtmlFormField;
 
 import javax.persistence.Column;
-
-import com.tonnyseko.servlet.app.model.view.CategoryStatus;
-
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
-import java.sql.Time;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "events")
-@HtmlCard(url = "/events?action=add")
-@HtmlForm(label = "Add Event", url = "/events")
+@HtmlCard(url = "./events?action=add")
+@HtmlForm(label = "Event", url = "/events")
 public class Event extends BaseEntity {
 
     @Column(name = "name")
     @HtmlFormField(label = "Name", name = "name")
     private String name;
+
     @Column(name = "image")
     @HtmlFormField(label = "Image", name = "image")
     private String image;
+
     @Column(name = "venue")
     @HtmlFormField(label = "Venue", name = "venue")
     private String venue;
+
     @Column(name = "date")
+    @Temporal(TemporalType.DATE)
     @HtmlFormField(label = "Date", name = "date", type = FormFieldType.DATE)
-    private String date;
+    private Date date;
+
     @Column(name = "time")
+    @Temporal(TemporalType.TIME)
     @HtmlFormField(label = "Time", name = "time", type = FormFieldType.TIME)
-    private String time;
+    private Date time;
+
     @Column(name = "category")
-    @HtmlFormField(label = "Category", name = "category", type = FormFieldType.SELECT, options = {"TECHNOLOGY", "BUSINESS", "SPORTS", "ENTERTAINMENT", "OTHER"})
+    @HtmlFormField(label = "Category", name = "category")
+    @Enumerated(EnumType.STRING)
     private CategoryStatus category;
+
     @Column(name = "description")
     @HtmlFormField(label = "Description", name = "description", type = FormFieldType.TEXTAREA)
     private String description;
+
+    public boolean isNew() {
+        return getId() == null;
+    }
 
     public Event() {
 
     }
 
-    public Event(String name, String image, String venue, String date, String time, CategoryStatus category, String description) {
+    public Event(String name, String image, String venue, Date date, Date time, CategoryStatus category, String description) {
         this.name = name;
         this.image = image;
         this.venue = venue;
         this.date = date;
-        this.time = String.valueOf(Time.valueOf(time));
+        this.time = time;
         this.category = category;
         this.description = description;
     }
@@ -79,19 +95,19 @@ public class Event extends BaseEntity {
         this.venue = venue;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 

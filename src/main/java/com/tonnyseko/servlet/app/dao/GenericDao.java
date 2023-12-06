@@ -1,5 +1,7 @@
 package com.tonnyseko.servlet.app.dao;
 
+import com.tonnyseko.servlet.app.model.entity.Event;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.persistence.EntityManager;
@@ -17,15 +19,25 @@ public class GenericDao<T> implements GenericDaoI<T> {
         if (database == null) {
             throw new NullPointerException("EntityManager is null");
         }
-        
+
         String jpql = "FROM " + entity.getSimpleName() + " e";
         System.out.println(jpql);
-        return (List<T>) database.createQuery(jpql, entity).getResultList();
+//        List<T> entities = database.createQuery(jpql, entity).getResultList();
+        List<T> entities = database.createQuery(jpql).getResultList();
+        if (entities.isEmpty()) {
+            System.out.println("No " + entity.getSimpleName() + "s " + "found");
+        }
+        return entities;
+
     }
 
     @Override
-    public void addOrUpdate(T entity) {
-        database.merge(entity);
+    public T addOrUpdate(T entity) {
+        if (database == null) {
+            throw new NullPointerException("EntityManager is null");
+        }
+        database.persist(entity);
+        return entity;
     }
 
     @Override

@@ -1,13 +1,17 @@
-package com.tonnyseko.servlet.database.helper;
+package com.tonnyseko.servlet.app.helpers;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DbColumn {
-    String columnName();
-    String definition() default "VARCHAR(255)";
+public @interface HtmlForm {
+    String label();
+
+    String url();
+
+    String httpMethod() default "POST";
 }
+
