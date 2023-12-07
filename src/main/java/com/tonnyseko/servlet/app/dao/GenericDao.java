@@ -19,10 +19,7 @@ public class GenericDao<T> implements GenericDaoI<T> {
         if (database == null) {
             throw new NullPointerException("EntityManager is null");
         }
-
-        String jpql = "FROM " + entity.getSimpleName() + " e";
-        System.out.println(jpql);
-//        List<T> entities = database.createQuery(jpql, entity).getResultList();
+        String jpql = "SELECT e FROM " + entity.getSimpleName() + " e";
         List<T> entities = database.createQuery(jpql).getResultList();
         if (entities.isEmpty()) {
             System.out.println("No " + entity.getSimpleName() + "s " + "found");
