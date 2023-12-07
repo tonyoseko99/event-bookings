@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 public class BaseAction extends HttpServlet {
-    @SuppressWarnings("unchecked")
-    // Serialize form data to entity
     public <T> T serializeForm(Class<T> entity, Map<String, String[]> parameterMap) {
         try {
             T object = entity.getDeclaredConstructor().newInstance();

@@ -1,8 +1,5 @@
 package com.tonnyseko.servlet.app.dao;
 
-import com.tonnyseko.servlet.app.model.entity.Event;
-
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

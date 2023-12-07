@@ -8,13 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/categories")
 public class CategoriesAction extends BaseAction {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
         EventBean eventBean = new EventBean();
 
         renderPage(request, response, 2, Event.class, eventBean.getEventsByCategory(CategoryStatus.valueOf(request.getParameter("category").toUpperCase())));

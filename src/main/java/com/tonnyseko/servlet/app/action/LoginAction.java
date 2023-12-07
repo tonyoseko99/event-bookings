@@ -1,6 +1,5 @@
 package com.tonnyseko.servlet.app.action;
 
-import com.tonnyseko.servlet.app.bean.AuthBean;
 import com.tonnyseko.servlet.app.bean.AuthBeanI;
 import com.tonnyseko.servlet.app.model.entity.User;
 import org.apache.commons.lang3.StringUtils;
