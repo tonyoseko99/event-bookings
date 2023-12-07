@@ -33,7 +33,9 @@ public class HtmlCpmRender implements Serializable {
             sb.append("<li><span class=\"event-label\">Category:</span> ").append(event.getCategory()).append("</li>");
             sb.append("</ul>");
 
-            sb.append("<a href=\"#\" class=\"event-btn\">View Event</a>");
+//            rsvp button
+            sb.append("<div class=\"rsvp-btn\">");
+            sb.append("<a href=\"./reservations?action=add&event_id=").append(event.getId()).append("\" class=\"rsvp-link\">RSVP</a>");
 
             sb.append("</div>");
             sb.append("</div>");

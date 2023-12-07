@@ -5,21 +5,16 @@ import com.tonnyseko.servlet.app.helpers.FormFieldType;
 import com.tonnyseko.servlet.app.helpers.HtmlCard;
 import com.tonnyseko.servlet.app.helpers.HtmlForm;
 import com.tonnyseko.servlet.app.helpers.HtmlFormField;
+import com.tonnyseko.servlet.app.utility.EnumConverter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
+import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
 @Table(name = "events")
 @HtmlCard(url = "./events?action=add")
-@HtmlForm(label = "Event", url = "/events")
+@HtmlForm(label = "Event", url = "./events")
 public class Event extends BaseEntity {
 
     @Column(name = "name")
@@ -40,9 +35,8 @@ public class Event extends BaseEntity {
     private Date date;
 
     @Column(name = "time")
-    @Temporal(TemporalType.TIME)
     @HtmlFormField(label = "Time", name = "time", type = FormFieldType.TIME)
-    private Date time;
+    private Time time;
 
     @Column(name = "category")
     @HtmlFormField(label = "Category", name = "category")
@@ -61,7 +55,7 @@ public class Event extends BaseEntity {
 
     }
 
-    public Event(String name, String image, String venue, Date date, Date time, CategoryStatus category, String description) {
+    public Event(String name, String image, String venue, Date date, Time time, CategoryStatus category, String description) {
         this.name = name;
         this.image = image;
         this.venue = venue;
@@ -103,11 +97,11 @@ public class Event extends BaseEntity {
         this.date = date;
     }
 
-    public Date getTime() {
+    public Time getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Time time) {
         this.time = time;
     }
 
@@ -125,5 +119,18 @@ public class Event extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", venue='" + venue + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", category=" + category +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

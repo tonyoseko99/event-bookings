@@ -1,8 +1,6 @@
 package com.tonnyseko.servlet.app.bean;
 
 import java.util.List;
-import java.util.logging.Logger;
-
 import com.tonnyseko.servlet.app.dao.GenericDao;
 import com.tonnyseko.servlet.app.dao.GenericDaoI;
 
@@ -11,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 public abstract class GenericBean<T> implements GenericBeanI<T> {
-    private static final Logger LOGGER = Logger.getLogger(GenericBean.class.getName());
 
     @PersistenceContext
     private EntityManager database;

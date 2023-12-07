@@ -3,7 +3,6 @@ package com.tonnyseko.servlet.app.bean;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 

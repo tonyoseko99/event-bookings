@@ -16,9 +16,9 @@ public class EventsAction extends BaseAction {
     private EventInterface eventBean;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Event event = serializeForm(Event.class, request.getParameterMap());
-        eventBean.addOrUpdate(event);
-        response.sendRedirect("./events");
+        eventBean.addOrUpdate(serializeForm(Event.class, request.getParameterMap()));
+        System.out.println(eventBean.toString());
+        response.sendRedirect(request.getContextPath() + "/events");
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

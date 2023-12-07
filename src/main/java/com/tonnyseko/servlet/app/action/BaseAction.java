@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 public class BaseAction extends HttpServlet {
-    @SuppressWarnings("unchecked")
-    // Serialize form data to entity
     public <T> T serializeForm(Class<T> entity, Map<String, String[]> parameterMap) {
         try {
             T object = entity.getDeclaredConstructor().newInstance();
@@ -39,8 +38,23 @@ public class BaseAction extends HttpServlet {
                         // Handle parsing error
                         e.printStackTrace();
                     }
+                } else if (field.getType().equals(Time.class)) {
+                    SimpleDateFormat format = new SimpleDateFormat("HH:mm"); // line 44
+                    try {
+                        Date date = format.parse(values[0]);
+                        Time time = new Time(date.getTime());
+                        field.setAccessible(true);
+                        field.set(object, time);
+                    } catch (ParseException e) {
+                        // Handle parsing error
+                        e.printStackTrace();
+                    }
+                } else if(field.getType().isEnum()) {
+                    field.setAccessible(true);
+                    field.set(object, Enum.valueOf((Class<Enum>) field.getType(), values[0]));
                 } else {
-                    BeanUtils.setProperty(object, key, values[0]);
+                    field.setAccessible(true);
+                    field.set(object, values[0]);
                 }
             }
             return object;
