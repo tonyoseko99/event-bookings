@@ -6,4 +6,5 @@ public enum FormFieldType {
     SELECT,
     DATE,
     TIME,
+    NUMBER,
 }

@@ -1,6 +1,5 @@
 package com.tonnyseko.servlet.app.action;
 
-import com.tonnyseko.servlet.app.bean.EventBean;
 import com.tonnyseko.servlet.app.bean.EventInterface;
 import com.tonnyseko.servlet.app.model.entity.Event;
 import com.tonnyseko.servlet.app.model.enums.CategoryStatus;

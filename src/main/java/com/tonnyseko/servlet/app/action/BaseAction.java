@@ -75,17 +75,22 @@ public class BaseAction extends HttpServlet {
 //        return null;
 //    }
 
-    public void renderPage(HttpServletRequest request, HttpServletResponse response, int activeMenu,
-                           Class<?> entity, List<Event> entityList)
+    public <T> void renderPage(HttpServletRequest request, HttpServletResponse response, int activeMenu,
+                           Class<?> entity, List<T> entityList)
             throws ServletException, IOException {
 
         request.setAttribute("activeMenu", activeMenu);
 
         if (StringUtils.trimToEmpty(request.getParameter("action")).equals("add")) {
             request.setAttribute("content", HtmlCpmRender.form(entity));
+        } else if(StringUtils.trimToEmpty(request.getParameter("action")).equals("rsvp")) {
+            request.setAttribute("content", HtmlCpmRender.form(entity));
+        } // render the table if the path is /reservations
+        else if (StringUtils.trimToEmpty(request.getServletPath()).equals("/reservations")) {
+            request.setAttribute("content", HtmlCpmRender.table(entityList));
         } else {
-            request.setAttribute("content", HtmlCpmRender.card(entityList));
-        }
+            request.setAttribute("content", HtmlCpmRender.card((List<Event>) entityList));
+        } 
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/app/index.jsp");
         dispatcher.forward(request, response);

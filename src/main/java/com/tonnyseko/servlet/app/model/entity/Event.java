@@ -1,11 +1,10 @@
 package com.tonnyseko.servlet.app.model.entity;
 
+import com.tonnyseko.servlet.app.helpers.HtmlCard;
 import com.tonnyseko.servlet.app.model.enums.CategoryStatus;
 import com.tonnyseko.servlet.app.helpers.FormFieldType;
-import com.tonnyseko.servlet.app.helpers.HtmlCard;
 import com.tonnyseko.servlet.app.helpers.HtmlForm;
 import com.tonnyseko.servlet.app.helpers.HtmlFormField;
-import com.tonnyseko.servlet.app.utility.EnumConverter;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -43,6 +42,11 @@ public class Event extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CategoryStatus category;
 
+    // event capacity
+    @Column(name = "capacity")
+    @HtmlFormField(label = "Capacity", name = "capacity", type = FormFieldType.NUMBER)
+    private Integer capacity;
+
     @Column(name = "description")
     @HtmlFormField(label = "Description", name = "description", type = FormFieldType.TEXTAREA)
     private String description;
@@ -55,7 +59,8 @@ public class Event extends BaseEntity {
 
     }
 
-    public Event(String name, String image, String venue, Date date, Time time, CategoryStatus category, String description) {
+    public Event(String name, String image, String venue, Date date, Time time, CategoryStatus category,
+                 String description) {
         this.name = name;
         this.image = image;
         this.venue = venue;
