@@ -1,22 +1,32 @@
 package com.tonnyseko.servlet.app.model.entity;
 
+import com.tonnyseko.servlet.app.helpers.FormFieldType;
 import com.tonnyseko.servlet.app.helpers.HtmlCard;
 import com.tonnyseko.servlet.app.helpers.HtmlForm;
+import com.tonnyseko.servlet.app.helpers.HtmlFormField;
+import com.tonnyseko.servlet.app.helpers.HtmlTableColumn;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "reservations")
-@HtmlCard(url = "./reservations?action=add")
-@HtmlForm(label = "rsvp", url = "/reservations")
+@HtmlCard(url = "./reservations?action=rsvp&id=")
+@HtmlForm(label = "rsvp", url = "./reservations")
 public class Reservation extends BaseEntity {
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "event_id")
+    @HtmlTableColumn(header = "Event")
     private Event event;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "name", length = 20, nullable = false)
+    @HtmlFormField(label = "name", type = FormFieldType.TEXT, required = true)
+    @HtmlTableColumn(header = "Name")
+    private String name;
+
 
     @Embedded
     private Address address;
@@ -24,12 +34,21 @@ public class Reservation extends BaseEntity {
     public Reservation() {
     }
 
-    public Reservation(Event event, User user, Address address) {
+    public Reservation(Event event, User user, String name, Address address) {
         this.event = event;
         this.user = user;
+        this.name = name;
         this.address = address;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public Event getEvent() {
         return event;
     }
