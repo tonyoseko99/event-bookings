@@ -2,6 +2,7 @@ package com.tonnyseko.servlet.app.model.entity;
 
 import com.tonnyseko.servlet.app.helpers.HtmlCard;
 import com.tonnyseko.servlet.app.model.enums.CategoryStatus;
+import com.tonnyseko.servlet.app.model.enums.EventStatus;
 import com.tonnyseko.servlet.app.helpers.FormFieldType;
 import com.tonnyseko.servlet.app.helpers.HtmlForm;
 import com.tonnyseko.servlet.app.helpers.HtmlFormField;
@@ -43,9 +44,14 @@ public class Event extends BaseEntity {
     private CategoryStatus category;
 
     // event capacity
-    @Column(name = "capacity")
-    @HtmlFormField(label = "Capacity", name = "capacity", type = FormFieldType.NUMBER)
-    private Integer capacity;
+    // @Column(name = "capacity")
+    // @HtmlFormField(label = "Capacity", name = "capacity", type = FormFieldType.NUMBER)
+    // private Integer capacity;
+
+    // @Column(name = "status")
+    // @HtmlFormField(label = "Status", name = "status")
+    // @Enumerated(EnumType.STRING)
+    // private EventStatus status;
 
     @Column(name = "description")
     @HtmlFormField(label = "Description", name = "description", type = FormFieldType.TEXTAREA)
@@ -59,8 +65,7 @@ public class Event extends BaseEntity {
 
     }
 
-    public Event(String name, String image, String venue, Date date, Time time, CategoryStatus category,
-                 String description) {
+    public Event(String name, String image, String venue, Date date, Time time, CategoryStatus category, String description) {
         this.name = name;
         this.image = image;
         this.venue = venue;
@@ -117,6 +122,25 @@ public class Event extends BaseEntity {
     public void setCategory(CategoryStatus category) {
         this.category = category;
     }
+
+    // public Integer getCapacity() {
+    //     return capacity;
+    // }
+
+    // public void setCapacity(Integer capacity) {
+    //     if (capacity < 0) {
+    //         throw new IllegalArgumentException("Capacity cannot be negative");
+    //     }
+    //     this.capacity = capacity;
+    // }
+
+    // public EventStatus getStatus() {
+    //     return status;
+    // }
+
+    // public void setStatus(EventStatus status) {
+    //     this.status = status;
+    // }
 
     public String getDescription() {
         return description;

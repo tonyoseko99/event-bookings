@@ -6,10 +6,10 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address {
 
-    @Column(name = "email", length = 20, nullable = false)
+    @Column(name = "email", length = 20)
     private String email;
 
-    @Column(name = "phone", length = 10, nullable = false)
+    @Column(name = "phone", length = 10)
     private String phone;
 
     @Column(name = "city")
@@ -44,5 +44,5 @@ public class Address {
         return zipCode;
     }
 
-    
+
 }

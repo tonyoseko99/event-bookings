@@ -18,13 +18,13 @@ public class ReservationsAction extends BaseAction {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("ReservationsAction.doPost");
-        reservationBean.addOrUpdate(serializeForm(Reservation.class, request.getParameterMap()));
+        reservationBean.addReservation(serializeForm(Reservation.class, request.getParameterMap()));
         System.out.println(reservationBean.toString());
         response.sendRedirect(request.getContextPath() + "/reservations");
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        renderPage(request, response, 1, Reservation.class, reservationBean.list(Reservation.class));
+        renderPage(request, response, 3, Reservation.class, reservationBean.list(Reservation.class));
     }
 
 

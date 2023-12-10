@@ -15,6 +15,7 @@ public class TopToolbar implements Menu, Serializable {
         links.add(new MenuLink("./home", "Home", MenuLinkStatus.ACTIVE));
         links.add(new MenuLink("./events", "Events", MenuLinkStatus.NOT_ACTIVE));
         links.add(new MenuLink("./categories", "Categories", MenuLinkStatus.NOT_ACTIVE));
+        links.add(new MenuLink("./reservations", "Reservations", MenuLinkStatus.NOT_ACTIVE));
         links.add(new MenuLink("./logout", "Logout", MenuLinkStatus.NOT_ACTIVE));
     }
 
@@ -40,39 +41,41 @@ public class TopToolbar implements Menu, Serializable {
     public String menu(int activeLinkIndex) {
         this.activateLink(activeLinkIndex);
 
-        String menubar = "<div class=\"topnav\">";
-        String leftMenu = "<div class=\"left\">";
-        String rightMenu = "<div class=\"right\">";
+        StringBuilder menubar = new StringBuilder("<div class=\"topnav\">");
+        StringBuilder leftMenu = new StringBuilder("<div class=\"left\">");
+        StringBuilder rightMenu = new StringBuilder("<div class=\"right\">");
 
-        for (MenuLink link : links)
-            // separate the logout link from the rest of the links using a div with
-            // class="right"
-            if (link.getLabel().equals("Logout"))
-                rightMenu += "<a href=\"" + link.getUrl() + "\" class=\"" + link.getStatus() + "\">" + link.getLabel()
-                        + "</a>";
-            else if (link.getLabel().equals("Categories")) {
-                leftMenu += "<div class=\"dropdown\">";
-                leftMenu += "<button class=\"dropbtn\">" + link.getLabel() + "</button>";
-                leftMenu += "<div class=\"dropdown-content\">";
+        for (MenuLink link : links) {
+            // Separate the logout link from the rest of the links using a div with class="right"
+            if (link.getLabel().equals("Logout")) {
+                rightMenu.append("<a href=\"").append(link.getUrl()).append("\" class=\"").append(link.getStatus()).append("\">")
+                        .append(link.getLabel()).append("</a>");
+            } else if (link.getLabel().equals("Categories")) {
+                leftMenu.append("<div class=\"dropdown\">");
+                leftMenu.append("<button class=\"dropbtn\">").append(link.getLabel()).append("</button>");
+                leftMenu.append("<div class=\"dropdown-content\">");
 
-                for (CategoryStatus category : categories)
-                    leftMenu += "<a href=\"" + link.getUrl() + "?category=" + category.name() + "\">" + category.name()
-                            + "</a>";
+                leftMenu.append("<select onchange=\"location = this.value;\">");
+                for (CategoryStatus category : categories) {
+                    leftMenu.append("<option value=\"").append(link.getUrl()).append("?category=").append(category.name()).append("\">")
+                            .append(category.name()).append("</option>");
+                }
+                leftMenu.append("</select>");
 
-                leftMenu += "</div>";
-                leftMenu += "</div>";
+                leftMenu.append("</div>");
+                leftMenu.append("</div>");
             } else {
-
-                leftMenu += "<a href=\"" + link.getUrl() + "\" class=\"" + link.getStatus() + "\">" + link.getLabel()
-                        + "</a>";
+                leftMenu.append("<a href=\"").append(link.getUrl()).append("\" class=\"").append(link.getStatus()).append("\">")
+                        .append(link.getLabel()).append("</a>");
             }
+        }
 
-        leftMenu += "</div>";
-        rightMenu += "</div>";
+        leftMenu.append("</div>");
+        rightMenu.append("</div>");
 
-        menubar += leftMenu + rightMenu + "</div>";
+        menubar.append(leftMenu).append(rightMenu).append("</div>");
 
-        return menubar;
+        return menubar.toString();
     }
 
     public void activateLink(int linkIndex) {
@@ -84,4 +87,3 @@ public class TopToolbar implements Menu, Serializable {
         }
     }
 }
-
