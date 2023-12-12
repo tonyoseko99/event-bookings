@@ -2,7 +2,6 @@ package com.tonnyseko.servlet.app.model.entity;
 
 import com.tonnyseko.servlet.app.helpers.HtmlCard;
 import com.tonnyseko.servlet.app.model.enums.CategoryStatus;
-import com.tonnyseko.servlet.app.model.enums.EventStatus;
 import com.tonnyseko.servlet.app.helpers.FormFieldType;
 import com.tonnyseko.servlet.app.helpers.HtmlForm;
 import com.tonnyseko.servlet.app.helpers.HtmlFormField;
@@ -10,6 +9,7 @@ import com.tonnyseko.servlet.app.helpers.HtmlFormField;
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "events")
@@ -57,12 +57,28 @@ public class Event extends BaseEntity {
     @HtmlFormField(label = "Description", name = "description", type = FormFieldType.TEXTAREA)
     private String description;
 
+    @OneToMany(mappedBy = "event")
+    private List<Reservation> reservations;
+
     public boolean isNew() {
         return getId() == null;
     }
 
     public Event() {
 
+    }
+
+    public Event(Long id, String name, String image, String venue, Date date, Time time, CategoryStatus category, String description) {
+        setId(id);
+        this.name = name;
+        this.image = image;
+        this.venue = venue;
+        this.date = date;
+        this.time = time;
+        this.category = category;
+        // this.capacity = capacity;
+        // this.status = status;
+        this.description = description;
     }
 
     public Event(String name, String image, String venue, Date date, Time time, CategoryStatus category, String description) {
@@ -72,7 +88,19 @@ public class Event extends BaseEntity {
         this.date = date;
         this.time = time;
         this.category = category;
+        // this.capacity = capacity;
+        // this.status = status;
         this.description = description;
+    }
+
+    // get id
+    public Long getId() {
+        return super.getId();
+    }
+
+    // set id
+    public void setId(Long id) {
+        super.setId(id);
     }
 
     public String getName() {

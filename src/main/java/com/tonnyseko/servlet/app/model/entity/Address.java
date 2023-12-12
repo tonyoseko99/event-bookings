@@ -32,16 +32,36 @@ public class Address {
         return email;
     }
 
+    public Address setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
     public String getPhone() {
         return phone;
+    }
+
+    public Address setPhone(String phone) {
+        this.phone = phone;
+        return this;
     }
 
     public String getCity() {
         return city;
     }
 
+    public Address setCity(String city) {
+        this.city = city;
+        return this;
+    }
+
     public String getZipCode() {
         return zipCode;
+    }
+
+    public Address setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+        return this;
     }
 
 

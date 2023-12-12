@@ -7,9 +7,11 @@ import java.util.List;
 public interface GenericDaoI<T> extends Serializable {
     List<T> list(Class<?> entity);
 
+    List<Object[]> nativeQuery(String sql);
+
     T addOrUpdate(T entity);
 
-    void delete(T entity);
+    void delete(Class<?> klass, Long id);
 
     EntityManager getDatabase();
 

@@ -19,8 +19,8 @@ public class Payment extends BaseEntity{
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "event_id")
-    private Event event;
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
 
     @Column(name = "amount")
     private double amount;
@@ -32,9 +32,10 @@ public class Payment extends BaseEntity{
     public Payment() {
     }
 
-    public Payment(User user, Event event, double amount, Date paymentDate) {
+    public Payment(Long id, User user, Reservation reservation, double amount, Date paymentDate) {
+        setId(id);
         this.user = user;
-        this.event = event;
+        this.reservation = reservation;
         this.amount = amount;
         this.paymentDate = paymentDate;
     }
@@ -44,8 +45,8 @@ public class Payment extends BaseEntity{
         return user;
     }
 
-    public Event getEvent() {
-        return event;
+    public Reservation getReservation() {
+        return reservation;
     }
 
     public double getAmount() {
@@ -60,8 +61,8 @@ public class Payment extends BaseEntity{
         this.user = user;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
     public void setAmount(double amount) {

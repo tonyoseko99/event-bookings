@@ -1,6 +1,7 @@
 package com.tonnyseko.servlet.app.bean;
 
 import java.util.List;
+
 import com.tonnyseko.servlet.app.dao.GenericDao;
 import com.tonnyseko.servlet.app.dao.GenericDaoI;
 

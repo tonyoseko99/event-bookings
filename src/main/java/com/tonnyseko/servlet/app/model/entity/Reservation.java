@@ -13,12 +13,12 @@ import javax.persistence.*;
 @HtmlCard(url = "./reservations?action=rsvp&id=")
 @HtmlForm(label = "rsvp", url = "./reservations")
 public class Reservation extends BaseEntity {
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "event_id")
     @HtmlTableColumn(header = "Event")
     private Event event;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

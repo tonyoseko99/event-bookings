@@ -14,6 +14,12 @@ import javax.persistence.Transient;
 @Table(name = "users")
 public class User extends BaseEntity {
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Payment> payments;
+
     @Column(name = "username")
     private String username;
 
@@ -22,9 +28,6 @@ public class User extends BaseEntity {
 
     @Transient
     private String confirmPassword;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Reservation> reservations = new ArrayList<>();
 
     public User() {
     }
@@ -58,4 +61,6 @@ public class User extends BaseEntity {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    
 }
