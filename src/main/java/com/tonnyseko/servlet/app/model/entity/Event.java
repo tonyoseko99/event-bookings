@@ -2,6 +2,7 @@ package com.tonnyseko.servlet.app.model.entity;
 
 import com.tonnyseko.servlet.app.helpers.HtmlCard;
 import com.tonnyseko.servlet.app.model.enums.CategoryStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tonnyseko.servlet.app.helpers.FormFieldType;
 import com.tonnyseko.servlet.app.helpers.HtmlForm;
 import com.tonnyseko.servlet.app.helpers.HtmlFormField;
@@ -60,6 +61,7 @@ public class Event extends BaseEntity {
     @OneToMany(mappedBy = "event")
     private List<Reservation> reservations;
 
+    @JsonIgnore
     public boolean isNew() {
         return getId() == null;
     }

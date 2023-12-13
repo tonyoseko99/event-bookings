@@ -1,8 +1,13 @@
 package com.tonnyseko.servlet.app.dao;
 
 import javax.enterprise.context.Dependent;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
+
+import com.tonnyseko.servlet.app.model.entity.Reservation;
+
 import java.util.List;
 
 @Dependent
@@ -27,19 +32,29 @@ public class GenericDao<T> implements GenericDaoI<T> {
 
     @Override
     public T addOrUpdate(T entity) {
+
         if (database == null) {
             throw new NullPointerException("EntityManager is null");
         }
-        database.merge(entity);
-        return entity;
+
+        try {
+            database.persist(entity);
+            database.flush();
+            return entity;
+        } catch (EntityExistsException e) {
+            database.merge(entity);
+            database.flush();
+            return entity;
+        } catch (ConstraintViolationException e) {
+            throw new ConstraintViolationException(e.getConstraintViolations());
+        }
+
     }
 
     @Override
     public List<Object[]> nativeQuery(String sql) {
         return database.createNativeQuery(sql).getResultList();
     }
-
-    
 
     @Override
     public void delete(Class<?> klass, Long id) {

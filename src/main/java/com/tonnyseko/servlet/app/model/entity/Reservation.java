@@ -10,7 +10,9 @@ import com.tonnyseko.servlet.app.helpers.HtmlTableColumn;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "reservations")
+@Table(name = "reservations", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "event_id", "user_id" })
+})
 @HtmlCard(url = "./reservations?action=rsvp&id=")
 @HtmlForm(label = "rsvp", url = "./reservations")
 public class Reservation extends BaseEntity {
@@ -29,7 +31,6 @@ public class Reservation extends BaseEntity {
     @HtmlFormField(label = "name", type = FormFieldType.TEXT, required = true)
     @HtmlTableColumn(header = "Name")
     private String name;
-
 
     @Embedded
     private Address address;
@@ -51,7 +52,7 @@ public class Reservation extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public Event getEvent() {
         return event;
     }
