@@ -32,9 +32,6 @@ public class Reservation extends BaseEntity {
     @HtmlTableColumn(header = "Name")
     private String name;
 
-    @Embedded
-    private Address address;
-
     public Reservation() {
     }
 
