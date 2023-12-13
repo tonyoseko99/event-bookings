@@ -68,6 +68,10 @@ public class Event extends BaseEntity {
 
     }
 
+    public Event(Long id) {
+        setId(id);
+    }
+
     public Event(Long id, String name, String image, String venue, Date date, Time time, CategoryStatus category, String description) {
         setId(id);
         this.name = name;

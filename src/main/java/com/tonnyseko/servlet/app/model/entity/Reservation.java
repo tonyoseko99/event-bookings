@@ -1,5 +1,6 @@
 package com.tonnyseko.servlet.app.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tonnyseko.servlet.app.helpers.FormFieldType;
 import com.tonnyseko.servlet.app.helpers.HtmlCard;
 import com.tonnyseko.servlet.app.helpers.HtmlForm;
@@ -15,10 +16,12 @@ import javax.persistence.*;
 public class Reservation extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "event_id")
+    @JsonProperty("event_id")
     @HtmlTableColumn(header = "Event")
     private Event event;
 
     @ManyToOne
+    @JsonProperty("user_id")
     @JoinColumn(name = "user_id")
     private User user;
 

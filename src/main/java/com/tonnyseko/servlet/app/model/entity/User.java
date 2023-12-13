@@ -1,6 +1,5 @@
 package com.tonnyseko.servlet.app.model.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,6 +29,10 @@ public class User extends BaseEntity {
     private String confirmPassword;
 
     public User() {
+    }
+
+    public User(Long id) {
+        setId(id);
     }
 
     public String getConfirmPassword() {
@@ -62,5 +65,4 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    
 }
