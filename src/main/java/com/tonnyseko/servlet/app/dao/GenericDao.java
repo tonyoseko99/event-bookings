@@ -30,12 +30,24 @@ public class GenericDao<T> implements GenericDaoI<T> {
         if (database == null) {
             throw new NullPointerException("EntityManager is null");
         }
-        database.persist(entity);
+        database.merge(entity);
         return entity;
     }
 
     @Override
-    public void delete(T entity) {
+    public List<Object[]> nativeQuery(String sql) {
+        return database.createNativeQuery(sql).getResultList();
+    }
+
+    
+
+    @Override
+    public void delete(Class<?> klass, Long id) {
+        Object entity = database.find(klass, id);
+        if (entity == null) {
+            throw new NullPointerException("Entity not found");
+        }
+
         database.remove(entity);
     }
 
@@ -48,4 +60,5 @@ public class GenericDao<T> implements GenericDaoI<T> {
     public void setDatabase(EntityManager database) {
         this.database = database;
     }
+
 }

@@ -33,4 +33,10 @@ public class EventBean extends GenericBean<Event> implements EventInterface {
                 .setParameter("category", CategoryStatus.TECHNOLOGY).setMaxResults(1).getResultList();
         return events;
     }
+
+    @Override
+    public Event findEventById(Long id) {
+        return database.find(Event.class, id);
+    }
+
 }

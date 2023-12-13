@@ -47,4 +47,6 @@ public class UserBean extends GenericBean<User> implements UserBeanI {
         throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
     }
 
+
+
 }

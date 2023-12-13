@@ -91,13 +91,10 @@ public class BaseAction extends HttpServlet {
         if (StringUtils.trimToEmpty(request.getParameter("action")).equals("add")) {
             request.setAttribute("content", HtmlCpmRender.form(entity));
         } else if (StringUtils.trimToEmpty(request.getParameter("action")).equals("rsvp")) {
-            String eventId = request.getParameter("id");
-            System.out.println("**********************************************");
-            System.out.println("**********************************************");
-            System.out.println("eventId: " + eventId);
-            System.out.println("**********************************************");
-            System.out.println("**********************************************");
-            request.setAttribute("content", HtmlCpmRender.form(entity, eventId));
+            String eventId = request.getParameter("event_id");
+            String userId = request.getParameter("user_id");
+
+            request.setAttribute("content", HtmlCpmRender.form(entity, eventId, userId));
         } // render the table if the path is /reservations
         else if (StringUtils.trimToEmpty(request.getServletPath()).equals("/reservations")) {
             request.setAttribute("content", HtmlCpmRender.table(entityList));

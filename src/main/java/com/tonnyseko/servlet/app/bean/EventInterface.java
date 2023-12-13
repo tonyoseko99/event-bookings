@@ -10,4 +10,6 @@ public interface EventInterface extends GenericBeanI<Event> {
     List<Event> getEventsByCategory(CategoryStatus category);
 
     List<Event> getFeaturedEvent();
+
+    Event findEventById(Long id);
 }
