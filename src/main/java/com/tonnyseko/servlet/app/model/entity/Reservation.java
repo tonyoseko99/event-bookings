@@ -32,6 +32,9 @@ public class Reservation extends BaseEntity {
     @HtmlTableColumn(header = "Name")
     private String name;
 
+    @Embedded
+    private Address address;
+
     public Reservation() {
     }
 
@@ -39,6 +42,17 @@ public class Reservation extends BaseEntity {
         this.event = event;
         this.user = user;
         this.name = name;
+        this.address = address;
+    }
+
+    public Address getAddress() {
+        if (address == null) {
+            address = new Address();
+        }
+        return address;
+    }
+
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -64,13 +78,5 @@ public class Reservation extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 }

@@ -29,25 +29,11 @@ public class User extends BaseEntity {
     @Transient
     private String confirmPassword;
 
-    @Embedded
-    private Address address;
-
     public User() {
     }
 
     public User(Long id) {
         setId(id);
-    }
-
-    public Address getAddress() {
-        if (address == null) {
-            address = new Address();
-        }
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getConfirmPassword() {
