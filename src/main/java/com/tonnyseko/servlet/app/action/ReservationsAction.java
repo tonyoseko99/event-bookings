@@ -48,7 +48,7 @@ public class ReservationsAction extends BaseAction {
         address.setZipCode(request.getParameter("address.zipCode"));
     
         // Set the address field of the Reservation object
-        reservation.setAddress(address);
+        // reservation.setAddress(address);
     
         // Save the Reservation object to the database
         reservationBean.addOrUpdate(reservation);
