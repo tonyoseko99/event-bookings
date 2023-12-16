@@ -1,6 +1,7 @@
 package com.tonnyseko.servlet.app.rest.api;
 
 import javax.ejb.EJB;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -43,5 +44,16 @@ public class ReservationsRestApi extends BaseRestApi {
         reservationBean.addOrUpdate(reservation);
         return respond();
     }
+
+
+    @Path("/list/{id}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteReservation(@PathParam(value = "id") Long id) {
+        reservationBean.delete(Reservation.class, id);
+        return respond();
+    }
+
+    // show all reservations made by a user
 
 }

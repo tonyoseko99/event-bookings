@@ -42,8 +42,14 @@ public class UserBean extends GenericBean<User> implements UserBeanI {
     }
 
     @Override
-    public boolean deleteUser(User user) {
+    public void delete(Class<?> klass, Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
 
+    @Override
+    public boolean deleteUser(User user) {
+        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
     }
 

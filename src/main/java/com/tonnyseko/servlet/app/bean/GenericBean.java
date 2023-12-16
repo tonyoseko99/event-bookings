@@ -36,7 +36,7 @@ public abstract class GenericBean<T> implements GenericBeanI<T> {
     }
 
     @Override
-    public void delete(T entity) {
+    public void delete(Class<?> klass, Long id) {
 
     }
 

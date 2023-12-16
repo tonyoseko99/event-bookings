@@ -17,4 +17,12 @@ public class ReservationBean extends GenericBean<Reservation> implements Reserva
         return database.find(Reservation.class, id);
     }
 
+    @Override
+    public void delete(Class<?> klass, Long id) {
+        Reservation reservation = findById(id);
+        if (reservation != null) {
+            database.remove(reservation);
+        }
+    }
+
 }
