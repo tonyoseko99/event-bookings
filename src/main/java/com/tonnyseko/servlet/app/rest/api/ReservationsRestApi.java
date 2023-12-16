@@ -55,5 +55,11 @@ public class ReservationsRestApi extends BaseRestApi {
     }
 
     // show all reservations made by a user
+    @Path("/list/users/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getReservationsByUserId(@PathParam(value = "id") Long id) {
+        return respond(reservationBean.getReservationsByUserId(id));
+    }
 
 }
