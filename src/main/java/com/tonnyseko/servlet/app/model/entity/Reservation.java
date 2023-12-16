@@ -8,6 +8,7 @@ import com.tonnyseko.servlet.app.helpers.HtmlFormField;
 import com.tonnyseko.servlet.app.helpers.HtmlTableColumn;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "reservations", uniqueConstraints = {
@@ -27,33 +28,61 @@ public class Reservation extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "code", length = 20, nullable = false)
+    @HtmlFormField(label = "code", type = FormFieldType.TEXT, required = true)
+    @HtmlTableColumn(header = "Code")
+    private String code = UUID.randomUUID().toString();
+
     @Column(name = "name", length = 20, nullable = false)
     @HtmlFormField(label = "name", type = FormFieldType.TEXT, required = true)
     @HtmlTableColumn(header = "Name")
     private String name;
 
-    @Embedded
-    private Address address;
+    @Column(name = "email", length = 20)
+    private String email;
+
+    @Column(name = "phone", length = 10)
+    private String phone;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "zip_code")
+    private String zipCode;
 
     public Reservation() {
     }
 
-    public Reservation(Event event, User user, String name, Address address) {
+    public Reservation(Long id, Event event, User user, String code, String name, String email, String phone,
+            String city,
+            String zipCode) {
+        setId(id);
         this.event = event;
         this.user = user;
+        this.code = code;
         this.name = name;
-        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.city = city;
+        this.zipCode = zipCode;
+
     }
 
-    public Address getAddress() {
-        if (address == null) {
-            address = new Address();
-        }
-        return address;
+    public Long getId() {
+        return super.getId();
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    // set id
+    public void setId(Long id) {
+        super.setId(id);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCodee(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -62,6 +91,38 @@ public class Reservation extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmaill(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhonee(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCityy(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCodee(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public Event getEvent() {

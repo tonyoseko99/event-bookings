@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
 public class AuthBean implements AuthBeanI, Serializable {
     @PersistenceContext
     private EntityManager database;
+    
     @Inject
     private HashText hashText;
 
