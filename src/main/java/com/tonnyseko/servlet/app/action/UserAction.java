@@ -22,6 +22,7 @@ public class UserAction extends BaseAction {
         dispatcher.forward(request, response);
     }
 
+    @SuppressWarnings("ErrorNotRethrown")
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User registerUser = serializeForm(User.class, req.getParameterMap());
 

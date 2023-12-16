@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 public class AuthBean implements AuthBeanI, Serializable {
     @PersistenceContext
     private EntityManager database;
-    
+
     @Inject
     private HashText hashText;
 
@@ -28,13 +28,18 @@ public class AuthBean implements AuthBeanI, Serializable {
             throw new RuntimeException(ex.getMessage());
         }
 
-        List<User> users = database.createQuery("FROM User u WHERE u.password=:password AND u.username=:username", User.class)
+        List<User> users = database
+                .createQuery("FROM User u WHERE u.password=:password AND u.username=:username", User.class)
                 .setParameter("password", loginUser.getPassword())
                 .setParameter("username", loginUser.getUsername())
                 .getResultList();
 
         if (!users.isEmpty()) {
-            return users.get(0);
+            User authenticatedUser = users.get(0);
+
+            // Return the role along with the authenticated user
+            return authenticatedUser;
+
         } else {
             throw new RuntimeException("Invalid username or password");
         }
