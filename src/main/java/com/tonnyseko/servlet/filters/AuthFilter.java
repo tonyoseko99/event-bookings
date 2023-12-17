@@ -2,6 +2,7 @@ package com.tonnyseko.servlet.filters;
 
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Priority;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/*") // This will filter all the requests
+@WebFilter(urlPatterns = "/*")
+@Priority(2)
 public class AuthFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

@@ -28,11 +28,6 @@ public class Reservation extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "code", length = 20, nullable = false)
-    @HtmlFormField(label = "code", type = FormFieldType.TEXT, required = true)
-    @HtmlTableColumn(header = "Code")
-    private String code = UUID.randomUUID().toString();
-
     @Column(name = "name", length = 20, nullable = false)
     @HtmlFormField(label = "name", type = FormFieldType.TEXT, required = true)
     @HtmlTableColumn(header = "Name")
@@ -53,13 +48,12 @@ public class Reservation extends BaseEntity {
     public Reservation() {
     }
 
-    public Reservation(Long id, Event event, User user, String code, String name, String email, String phone,
+    public Reservation(Long id, Event event, User user, String name, String email, String phone,
             String city,
             String zipCode) {
         setId(id);
         this.event = event;
         this.user = user;
-        this.code = code;
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -75,14 +69,6 @@ public class Reservation extends BaseEntity {
     // set id
     public void setId(Long id) {
         super.setId(id);
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCodee(String code) {
-        this.code = code;
     }
 
     public String getName() {

@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import com.tonnyseko.servlet.app.model.entity.User;
 import com.tonnyseko.servlet.app.utility.HashText;
 
-
 @Stateless
 public class UserBean extends GenericBean<User> implements UserBeanI {
 
@@ -37,14 +36,11 @@ public class UserBean extends GenericBean<User> implements UserBeanI {
             throw new RuntimeException("Error hashing password");
         }
 
+        // Set role to USER if not set
+        user.setRole(user.getRole());
+
         getDao().addOrUpdate(user);
         return false;
-    }
-
-    @Override
-    public void delete(Class<?> klass, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
     @Override
@@ -52,7 +48,5 @@ public class UserBean extends GenericBean<User> implements UserBeanI {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
     }
-
-
 
 }
