@@ -28,11 +28,6 @@ public class Reservation extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // @Column(name = "code", length = 20, nullable = false)
-    // @HtmlFormField(label = "code", type = FormFieldType.TEXT, required = true)
-    // @HtmlTableColumn(header = "Code")
-    // private String code = UUID.randomUUID().toString();
-
     @Column(name = "name", length = 20, nullable = false)
     @HtmlFormField(label = "name", type = FormFieldType.TEXT, required = true)
     @HtmlTableColumn(header = "Name")

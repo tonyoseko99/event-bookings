@@ -5,14 +5,12 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.tonnyseko.servlet.app.bean.AuthBeanI;
 import com.tonnyseko.servlet.app.bean.UserBeanI;
 import com.tonnyseko.servlet.app.model.entity.User;
-import com.tonnyseko.servlet.app.model.enums.Role;
 
 @Path("/auth")
 public class AuthRestApi {

@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.tonnyseko.servlet.app.model.entity.User;
-import com.tonnyseko.servlet.app.model.enums.Role;
 import com.tonnyseko.servlet.app.utility.HashText;
 
 @Stateless
