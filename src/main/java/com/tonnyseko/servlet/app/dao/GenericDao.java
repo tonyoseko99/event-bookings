@@ -36,7 +36,6 @@ public class GenericDao<T> implements GenericDaoI<T> {
         if (database == null) {
             throw new NullPointerException("EntityManager is null");
         }
-
         database.merge(entity);
         return entity;
 

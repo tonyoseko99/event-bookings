@@ -1,6 +1,6 @@
 package com.tonnyseko.servlet.app.model.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +9,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "payments")
-public class Payment extends BaseEntity{
+@Table(name = "payments", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "reservation_id", "user_id" })
+})
+public class Payment extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -22,23 +25,32 @@ public class Payment extends BaseEntity{
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
+
     @Column(name = "amount")
     private double amount;
 
     @Column(name = "payment_date")
-    private LocalDate paymentDate;
+    @Temporal(TemporalType.DATE)
+    private Date paymentDate;
+
+    // fetch ticket price from event
+    public double getTicketPrice() {
+        return event.getTicketPrice();
+    }
 
     public Payment() {
     }
 
-    public Payment(Long id, User user, Reservation reservation, double amount, LocalDate paymentDate) {
+    public Payment(Long id, User user, Reservation reservation, double amount, Date paymentDate) {
         setId(id);
         this.user = user;
         this.reservation = reservation;
         this.amount = amount;
         this.paymentDate = paymentDate;
     }
-
 
     public User getUser() {
         return user;
@@ -48,11 +60,20 @@ public class Payment extends BaseEntity{
         return reservation;
     }
 
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+        this.amount = event.getTicketPrice();
+    }
+
     public double getAmount() {
         return amount;
     }
 
-    public LocalDate getPaymentDate() {
+    public Date getPaymentDate() {
         return paymentDate;
     }
 
@@ -68,7 +89,7 @@ public class Payment extends BaseEntity{
         this.amount = amount;
     }
 
-    public void setPaymentDate(LocalDate paymentDate) {
+    public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
     }
 
@@ -76,6 +97,4 @@ public class Payment extends BaseEntity{
         return getId() == null;
     }
 
-    
-    
 }

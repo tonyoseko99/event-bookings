@@ -44,22 +44,15 @@ public class Event extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CategoryStatus category;
 
-    // event capacity
-    // @Column(name = "capacity")
-    // @HtmlFormField(label = "Capacity", name = "capacity", type = FormFieldType.NUMBER)
-    // private Integer capacity;
-
-    // @Column(name = "status")
-    // @HtmlFormField(label = "Status", name = "status")
-    // @Enumerated(EnumType.STRING)
-    // private EventStatus status;
-
     @Column(name = "description")
     @HtmlFormField(label = "Description", name = "description", type = FormFieldType.TEXTAREA)
     private String description;
 
     @OneToMany(mappedBy = "event")
     private List<Reservation> reservations;
+
+    @Column(name = "ticket_price")
+    private double ticketPrice;
 
     @JsonIgnore
     public boolean isNew() {
@@ -74,7 +67,8 @@ public class Event extends BaseEntity {
         setId(id);
     }
 
-    public Event(Long id, String name, String image, String venue, Date date, Time time, CategoryStatus category, String description) {
+    public Event(Long id, String name, double ticketPrice, String image, String venue, Date date, Time time, CategoryStatus category,
+            String description) {
         setId(id);
         this.name = name;
         this.image = image;
@@ -82,21 +76,20 @@ public class Event extends BaseEntity {
         this.date = date;
         this.time = time;
         this.category = category;
-        // this.capacity = capacity;
-        // this.status = status;
         this.description = description;
+        this.ticketPrice = ticketPrice;
     }
 
-    public Event(String name, String image, String venue, Date date, Time time, CategoryStatus category, String description) {
+    public Event(String name, String image, double ticketPrice, String venue, Date date, Time time, CategoryStatus category,
+            String description) {
         this.name = name;
         this.image = image;
         this.venue = venue;
         this.date = date;
         this.time = time;
         this.category = category;
-        // this.capacity = capacity;
-        // this.status = status;
         this.description = description;
+        this.ticketPrice = ticketPrice;
     }
 
     // get id
@@ -157,31 +150,20 @@ public class Event extends BaseEntity {
         this.category = category;
     }
 
-    // public Integer getCapacity() {
-    //     return capacity;
-    // }
-
-    // public void setCapacity(Integer capacity) {
-    //     if (capacity < 0) {
-    //         throw new IllegalArgumentException("Capacity cannot be negative");
-    //     }
-    //     this.capacity = capacity;
-    // }
-
-    // public EventStatus getStatus() {
-    //     return status;
-    // }
-
-    // public void setStatus(EventStatus status) {
-    //     this.status = status;
-    // }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+    
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 
     @Override
@@ -194,6 +176,7 @@ public class Event extends BaseEntity {
                 ", time=" + time +
                 ", category=" + category +
                 ", description='" + description + '\'' +
+                ", ticketPrice=" + ticketPrice +
                 '}';
     }
 }
