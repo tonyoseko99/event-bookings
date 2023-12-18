@@ -1,13 +1,8 @@
 package com.tonnyseko.servlet.app.dao;
 
 import javax.enterprise.context.Dependent;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolationException;
-
-import com.tonnyseko.servlet.app.model.entity.Reservation;
-
 import java.util.List;
 
 @Dependent
@@ -30,6 +25,15 @@ public class GenericDao<T> implements GenericDaoI<T> {
 
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public T findById(Class<?> klass, Long id) {
+        if (database == null) {
+            throw new NullPointerException("EntityManager is null");
+        }
+        return (T) database.find(klass, id);
+    }
+
     @Override
     public T addOrUpdate(T entity) {
 
@@ -41,6 +45,7 @@ public class GenericDao<T> implements GenericDaoI<T> {
 
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Object[]> nativeQuery(String sql) {
         return database.createNativeQuery(sql).getResultList();
