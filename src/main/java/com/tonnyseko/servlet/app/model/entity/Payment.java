@@ -32,9 +32,14 @@ public class Payment extends BaseEntity {
     @Column(name = "amount")
     private double amount;
 
-    @Column(name = "payment_date" )
+    @Column(name = "payment_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date paymentDate;
+
+    // check if payment is made
+    public boolean isPaid() {
+        return paymentDate != null;
+    }
 
     // fetch ticket price from event
     public double getTicketPrice() {
@@ -50,6 +55,14 @@ public class Payment extends BaseEntity {
         this.reservation = reservation;
         this.amount = amount;
         this.paymentDate = paymentDate;
+    }
+
+    public Long getId() {
+        return super.getId();
+    }
+
+    public void setId(Long id) {
+        super.setId(id);
     }
 
     public User getUser() {

@@ -27,6 +27,15 @@ public abstract class GenericBean<T> implements GenericBeanI<T> {
     }
 
     @Override
+    public T findById(Class<?> klass, Long id) {
+        if (database == null) {
+            throw new IllegalStateException("EntityManager is null. Make sure it is properly injected.");
+        }
+        genericDao.setDatabase(database);
+        return genericDao.findById(klass, id);
+    }
+
+    @Override
     public void addOrUpdate(T entity) {
         if (database == null) {
             throw new IllegalStateException("EntityManager is null. Make sure it is properly injected.");

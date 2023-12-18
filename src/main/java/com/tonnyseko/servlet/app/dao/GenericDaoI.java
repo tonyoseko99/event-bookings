@@ -7,6 +7,8 @@ import java.util.List;
 public interface GenericDaoI<T> extends Serializable {
     List<T> list(Class<?> entity);
 
+    T findById(Class<?> klass, Long id);
+
     List<Object[]> nativeQuery(String sql);
 
     T addOrUpdate(T entity);

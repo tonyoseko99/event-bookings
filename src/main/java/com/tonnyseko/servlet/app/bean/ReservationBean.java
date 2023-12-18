@@ -1,8 +1,6 @@
 package com.tonnyseko.servlet.app.bean;
 
 import com.tonnyseko.servlet.app.model.entity.Reservation;
-import com.tonnyseko.servlet.app.rest.api.RestResponseWrapper;
-
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -39,6 +37,7 @@ public class ReservationBean extends GenericBean<Reservation> implements Reserva
 
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Reservation> getReservationsByUserIdAndEventId(Long userId, Long eventId) {
         String sql = "SELECT * FROM reservations WHERE user_id = ? AND event_id = ?";
@@ -48,6 +47,7 @@ public class ReservationBean extends GenericBean<Reservation> implements Reserva
         return query.getResultList();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Object[]> getReservationsByEventId(Long eventId) {
         String sql = "SELECT * FROM reservations WHERE event_id = ?";
