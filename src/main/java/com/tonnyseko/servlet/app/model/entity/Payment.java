@@ -32,8 +32,8 @@ public class Payment extends BaseEntity {
     @Column(name = "amount")
     private double amount;
 
-    @Column(name = "payment_date")
-    @Temporal(TemporalType.DATE)
+    @Column(name = "payment_date" )
+    @Temporal(TemporalType.TIMESTAMP)
     private Date paymentDate;
 
     // fetch ticket price from event
