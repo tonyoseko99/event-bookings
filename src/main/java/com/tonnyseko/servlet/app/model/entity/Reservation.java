@@ -8,7 +8,6 @@ import com.tonnyseko.servlet.app.helpers.HtmlFormField;
 import com.tonnyseko.servlet.app.helpers.HtmlTableColumn;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "reservations", uniqueConstraints = {
@@ -83,7 +82,7 @@ public class Reservation extends BaseEntity {
         return email;
     }
 
-    public void setEmaill(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -91,7 +90,7 @@ public class Reservation extends BaseEntity {
         return phone;
     }
 
-    public void setPhonee(String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -99,7 +98,7 @@ public class Reservation extends BaseEntity {
         return city;
     }
 
-    public void setCityy(String city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
@@ -107,7 +106,7 @@ public class Reservation extends BaseEntity {
         return zipCode;
     }
 
-    public void setZipCodee(String zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 

@@ -37,17 +37,8 @@ public class GenericDao<T> implements GenericDaoI<T> {
             throw new NullPointerException("EntityManager is null");
         }
 
-        try {
-            database.persist(entity);
-            database.flush();
-            return entity;
-        } catch (EntityExistsException e) {
-            database.merge(entity);
-            database.flush();
-            return entity;
-        } catch (ConstraintViolationException e) {
-            throw new ConstraintViolationException(e.getConstraintViolations());
-        }
+        database.merge(entity);
+        return entity;
 
     }
 

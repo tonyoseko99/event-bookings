@@ -1,6 +1,6 @@
 package com.tonnyseko.servlet.app.model.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,14 +25,13 @@ public class Payment extends BaseEntity{
     @Column(name = "amount")
     private double amount;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "payment_date")
-    private Date paymentDate;
+    private LocalDate paymentDate;
 
     public Payment() {
     }
 
-    public Payment(Long id, User user, Reservation reservation, double amount, Date paymentDate) {
+    public Payment(Long id, User user, Reservation reservation, double amount, LocalDate paymentDate) {
         setId(id);
         this.user = user;
         this.reservation = reservation;
@@ -53,7 +52,7 @@ public class Payment extends BaseEntity{
         return amount;
     }
 
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
@@ -69,7 +68,7 @@ public class Payment extends BaseEntity{
         this.amount = amount;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 

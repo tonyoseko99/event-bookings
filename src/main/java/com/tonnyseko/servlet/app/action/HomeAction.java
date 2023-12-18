@@ -1,8 +1,6 @@
 package com.tonnyseko.servlet.app.action;
 
 import com.tonnyseko.servlet.app.bean.EventInterface;
-import com.tonnyseko.servlet.app.model.entity.Event;
-
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -18,7 +16,7 @@ public class HomeAction extends BaseAction {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        renderPage(request, response, 1, Event.class, bookingBean.getFeaturedEvent());
+        // renderPage(request, response, 1, Event.class, bookingBean.getFeaturedEvent());
 
     }
 

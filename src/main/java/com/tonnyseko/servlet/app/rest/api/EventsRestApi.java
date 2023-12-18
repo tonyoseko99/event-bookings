@@ -54,15 +54,6 @@ public class EventsRestApi extends BaseRestApi {
         return respond();
     }
 
-    @Path("/update")
-    @PATCH
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response update(Event event) {
-        eventsBean.addOrUpdate(event);
-        return respond();
-    }
-
     @Path("/delete/{id}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
