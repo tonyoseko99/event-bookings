@@ -62,4 +62,21 @@ public class ReservationsRestApi extends BaseRestApi {
         return respond(reservationBean.getReservationsByUserId(id));
     }
 
+    // show all reservations by user_id and event_id
+    @Path("/list/users/{userId}/events/{eventId}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getReservationsByUserIdAndEventId(@PathParam(value = "userId") Long userId,
+            @PathParam(value = "eventId") Long eventId) {
+        return respond(reservationBean.getReservationsByUserIdAndEventId(userId, eventId));
+    }
+
+    // list all user details from the reservation table by event_id
+    @Path("/list/user-details/{eventId}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getReservationsByEventId(@PathParam(value = "eventId") Long eventId) {
+        return respond(reservationBean.getReservationsByEventId(eventId));
+    }
+
 }

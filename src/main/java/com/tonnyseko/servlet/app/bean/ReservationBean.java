@@ -1,6 +1,7 @@
 package com.tonnyseko.servlet.app.bean;
 
 import com.tonnyseko.servlet.app.model.entity.Reservation;
+import com.tonnyseko.servlet.app.rest.api.RestResponseWrapper;
 
 import java.util.List;
 
@@ -36,6 +37,23 @@ public class ReservationBean extends GenericBean<Reservation> implements Reserva
         query.setParameter(1, userId);
         return query.getResultList();
 
+    }
+
+    @Override
+    public List<Reservation> getReservationsByUserIdAndEventId(Long userId, Long eventId) {
+        String sql = "SELECT * FROM reservations WHERE user_id = ? AND event_id = ?";
+        Query query = database.createNativeQuery(sql, Reservation.class);
+        query.setParameter(1, userId);
+        query.setParameter(2, eventId);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> getReservationsByEventId(Long eventId) {
+        String sql = "SELECT * FROM reservations WHERE event_id = ?";
+        Query query = database.createNativeQuery(sql);
+        query.setParameter(1, eventId);
+        return query.getResultList();
     }
 
 }
