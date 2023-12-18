@@ -21,20 +21,6 @@ public class EventBean extends GenericBean<Event> implements EventInterface {
     }
 
     @Override
-    public List<Event> getEventsByCategory(CategoryStatus category) {
-        List<Event> events = database.createQuery("SELECT e FROM Event e WHERE e.category = :category", Event.class)
-                .setParameter("category", category).getResultList();
-        return events;
-    }
-
-    @Override
-    public List<Event> getFeaturedEvent() {
-        List<Event> events = database.createQuery("SELECT e FROM Event e WHERE e.category = :category", Event.class)
-                .setParameter("category", CategoryStatus.TECHNOLOGY).setMaxResults(1).getResultList();
-        return events;
-    }
-
-    @Override
     public Event findEventById(Long id) {
         return database.find(Event.class, id);
     }

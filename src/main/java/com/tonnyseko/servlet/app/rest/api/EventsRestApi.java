@@ -2,6 +2,7 @@ package com.tonnyseko.servlet.app.rest.api;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
@@ -53,12 +54,11 @@ public class EventsRestApi extends BaseRestApi {
         return respond();
     }
 
-    @Path("/update")
-    @PATCH
+    @Path("/delete/{id}")
+    @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response update(Event event) {
-        eventsBean.addOrUpdate(event);
+    public Response delete(@PathParam("id") Long id) {
+        eventsBean.delete(Event.class, id);
         return respond();
     }
 }

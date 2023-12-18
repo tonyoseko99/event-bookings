@@ -37,6 +37,11 @@ public abstract class GenericBean<T> implements GenericBeanI<T> {
 
     @Override
     public void delete(Class<?> klass, Long id) {
+        if (database == null) {
+            throw new IllegalStateException("EntityManager is null. Make sure it is properly injected.");
+        }
+        genericDao.setDatabase(database);
+        genericDao.delete(klass, id);
 
     }
 
