@@ -1,7 +1,5 @@
 package com.tonnyseko.servlet.app.bean;
 
-import com.tonnyseko.servlet.app.model.helpers.MpesaCallbackData;
-
 import java.io.Serializable;
 
 public interface MpesaBeanI extends Serializable {
@@ -9,5 +7,5 @@ public interface MpesaBeanI extends Serializable {
 
     String initiateOnlinePayment(String phoneNumber, double amount, String accountReference, String transactionDesc);
 
-    void handleCallback(MpesaCallbackData callbackData);
+    void handleCallback(String callbackJson);
 }

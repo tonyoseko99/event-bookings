@@ -3,57 +3,66 @@ package com.tonnyseko.servlet.app.model.helpers;
 import java.io.Serializable;
 import java.util.Map;
 
-public class MpesaCallbackData implements Serializable{
-    private String MerchantRequestID;
-    private String CheckoutRequestID;
-    private int ResultCode;
-    private String ResultDesc;
-    private Map<String, String> CallbackMetadata;
+public class MpesaCallbackData implements Serializable {
+    private String merchantRequestID;
+    private String checkoutRequestID;
+    private int resultCode;
+    private String resultDesc;
+    private String callbackMetadata;
+
+    public MpesaCallbackData() {
+    }
+
+    public MpesaCallbackData(Map<String, String[]> parameterMap) {
+        this.merchantRequestID = getParameter(parameterMap, "MerchantRequestID");
+        this.checkoutRequestID = getParameter(parameterMap, "CheckoutRequestID");
+        this.resultCode = Integer.parseInt(getParameter(parameterMap, "ResultCode"));
+        this.resultDesc = getParameter(parameterMap, "ResultDesc");
+        this.callbackMetadata = getParameter(parameterMap, "CallbackMetadata");
+    }
+
+    private String getParameter(Map<String, String[]> parameterMap, String parameterName) {
+        String[] values = parameterMap.get(parameterName);
+        return (values != null && values.length > 0) ? values[0] : null;
+    }
 
     public String getMerchantRequestID() {
-        return MerchantRequestID;
+        return merchantRequestID;
     }
 
     public void setMerchantRequestID(String merchantRequestID) {
-        MerchantRequestID = merchantRequestID;
+        this.merchantRequestID = merchantRequestID;
     }
 
     public String getCheckoutRequestID() {
-        return CheckoutRequestID;
+        return checkoutRequestID;
     }
 
     public void setCheckoutRequestID(String checkoutRequestID) {
-        CheckoutRequestID = checkoutRequestID;
+        this.checkoutRequestID = checkoutRequestID;
     }
 
     public int getResultCode() {
-        return ResultCode;
+        return resultCode;
     }
 
     public void setResultCode(int resultCode) {
-        ResultCode = resultCode;
+        this.resultCode = resultCode;
     }
 
     public String getResultDesc() {
-        return ResultDesc;
+        return resultDesc;
     }
 
     public void setResultDesc(String resultDesc) {
-        ResultDesc = resultDesc;
+        this.resultDesc = resultDesc;
     }
 
-    public Map<String, String> getCallbackMetadata() {
-        return CallbackMetadata;
+    public String getCallbackMetadata() {
+        return callbackMetadata;
     }
 
-    public void setCallbackMetadata(Map<String, String> callbackMetadata) {
-        CallbackMetadata = callbackMetadata;
-    }
-
-    @Override
-    public String toString() {
-        return "MpesaCallbackData [CallbackMetadata=" + CallbackMetadata + ", CheckoutRequestID=" + CheckoutRequestID
-                + ", MerchantRequestID=" + MerchantRequestID + ", ResultCode=" + ResultCode + ", ResultDesc="
-                + ResultDesc + "]";
+    public void setCallbackMetadata(String callbackMetadata) {
+        this.callbackMetadata = callbackMetadata;
     }
 }

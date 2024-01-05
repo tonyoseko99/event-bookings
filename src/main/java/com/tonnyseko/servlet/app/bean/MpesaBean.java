@@ -82,7 +82,7 @@ public class MpesaBean implements MpesaBeanI {
             String lipaNaMpesaUrl = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
             String businessShortCode = "174379";
             String passKey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-            String callBackUrl = "https://49ce-102-135-169-115.ngrok-free.app/bookings/rest/mpesa/callback";
+            String callBackUrl = "https://7e2c-102-135-169-115.ngrok-free.app/bookings/rest/mpesa/callback";
 
             // Generate timestamp
             String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -132,37 +132,51 @@ public class MpesaBean implements MpesaBeanI {
     }
 
     @Override
-    public void handleCallback(MpesaCallbackData callbackData) {
-        String merchantRequestId = callbackData.getMerchantRequestID();
-        String checkoutRequestId = callbackData.getCheckoutRequestID();
-        int resultCode = callbackData.getResultCode();
-        String resultDesc = callbackData.getResultDesc();
-        String metadata = callbackData.getCallbackMetadata().toString();
+    public void handleCallback(String callbackJson) {
+        try {
+            // Parse JSON callback data
+            MpesaCallbackData callbackData = parseCallbackJson(callbackJson);
 
-        // process the callback data
-        LOGGER.info("Handling M-Pesa callback. Merchant Request ID: {}, Checkout Request ID: {}",
-                callbackData.getMerchantRequestID(), callbackData.getCheckoutRequestID());
+            // Process the callback data
+            LOGGER.info("Handling M-Pesa callback. Merchant Request ID: {}, Checkout Request ID: {}",
+                    callbackData.getMerchantRequestID(), callbackData.getCheckoutRequestID());
 
-        EntityTransaction transaction = database.getTransaction();
-        transaction.begin();
+            // Store callback data in the database
+            persistCallbackData(callbackData);
+        } catch (JsonException e) {
+            LOGGER.error("Failed to parse JSON callback data. Response: {}", callbackJson);
+            throw new RuntimeException("Failed to parse JSON callback data");
+        }
+    }
 
-        MpesaTransaction mpesaTransaction = database.find(MpesaTransaction.class, merchantRequestId);
+    private MpesaCallbackData parseCallbackJson(String callbackJson) {
+        try {
+            Jsonb jsonb = JsonbBuilder.create();
+            return jsonb.fromJson(callbackJson, MpesaCallbackData.class);
+        } catch (JsonException e) {
+            throw new RuntimeException("Failed to parse JSON callback data", e);
+        }
+    }
+
+    private void persistCallbackData(MpesaCallbackData callbackData) {
+        // Check if the data already exists
+        MpesaTransaction mpesaTransaction = database.find(MpesaTransaction.class, callbackData.getMerchantRequestID());
         if (mpesaTransaction == null) {
             mpesaTransaction = new MpesaTransaction();
-            mpesaTransaction.setMerchantRequestId(merchantRequestId);
-            mpesaTransaction.setCheckoutRequestId(checkoutRequestId);
-            mpesaTransaction.setResponseCode(String.valueOf(resultCode));
-            mpesaTransaction.setResponseDescription(resultDesc);
-            mpesaTransaction.setCustomerMessage(metadata);
+            mpesaTransaction.setMerchantRequestId(callbackData.getMerchantRequestID());
+            mpesaTransaction.setCheckoutRequestId(callbackData.getCheckoutRequestID());
+            mpesaTransaction.setResponseCode(String.valueOf(callbackData.getResultCode()));
+            mpesaTransaction.setResponseDescription(callbackData.getResultDesc());
+            mpesaTransaction.setCustomerMessage(callbackData.getCallbackMetadata());
 
             database.persist(mpesaTransaction);
         } else {
-            mpesaTransaction.setResponseCode(String.valueOf(resultCode));
-            mpesaTransaction.setResponseDescription(resultDesc);
-            mpesaTransaction.setCustomerMessage(metadata);
+            // Update existing data
+            mpesaTransaction.setResponseCode(String.valueOf(callbackData.getResultCode()));
+            mpesaTransaction.setResponseDescription(callbackData.getResultDesc());
+            mpesaTransaction.setCustomerMessage(callbackData.getCallbackMetadata());
 
             database.merge(mpesaTransaction);
         }
-
     }
 }

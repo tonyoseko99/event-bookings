@@ -52,16 +52,9 @@ public class MPesaResource extends BaseRestApi {
     @Path("/callback")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response handleCallback(MpesaCallbackData callbackData) {
-        try {
-            LOGGER.info("Callback data: {}", callbackData);
-            mpesaBean.handleCallback(callbackData);
-            return Response.ok().build();
-        } catch (Exception e) {
-            LOGGER.error("Failed to handle callback", e);
-            return Response.serverError().build();
-        }
-
+    public Response handleCallback(String callbackJson) {
+        mpesaBean.handleCallback(callbackJson);
+        return Response.ok().build();
     }
 
 }
