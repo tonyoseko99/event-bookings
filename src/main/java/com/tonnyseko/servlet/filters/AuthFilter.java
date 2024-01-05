@@ -19,19 +19,20 @@ public class AuthFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        HttpSession httpSession = httpRequest.getSession();
 
+        HttpSession httpSession = httpRequest.getSession();
         String servletPath = httpRequest.getServletPath();
         System.out.println(servletPath);
 
         if (httpSession.isNew() || StringUtils.isBlank((String) httpSession.getAttribute("loggedInId"))) {
             httpSession.invalidate();
 
-            if (servletPath.equals("/login") || servletPath.contains(".jsp") || servletPath.equals("/registration") || servletPath.equals("/rest")) {
+            if (servletPath.equals("/login") || servletPath.contains(".jsp") || servletPath.equals("/registration")
+                    || servletPath.equals("/rest")) {
                 chain.doFilter(request, response);
             } else {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/");

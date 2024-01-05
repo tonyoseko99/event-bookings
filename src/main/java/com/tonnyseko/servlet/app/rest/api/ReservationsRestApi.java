@@ -45,7 +45,6 @@ public class ReservationsRestApi extends BaseRestApi {
         return respond();
     }
 
-
     @Path("/list/{id}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
@@ -71,12 +70,28 @@ public class ReservationsRestApi extends BaseRestApi {
         return respond(reservationBean.getReservationsByUserIdAndEventId(userId, eventId));
     }
 
+    // unRsvp a user from an event
+    @Path("/list/users/{userId}/events/{eventId}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response unRsvp(@PathParam(value = "userId") Long userId, @PathParam(value = "eventId") Long eventId) {
+        reservationBean.deleteByEventIdAndUserId(userId, eventId);
+        return respond();
+    }
+
     // list all user details from the reservation table by event_id
     @Path("/list/user-details/{eventId}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getReservationsByEventId(@PathParam(value = "eventId") Long eventId) {
         return respond(reservationBean.getReservationsByEventId(eventId));
+    }
+
+    @Path("/ticket/{eventId}/{reservationId}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response get(@PathParam("eventId") Long eventId, @PathParam("reservationId") Long reservationId) {
+        return respond(reservationBean.findByEventAndReservation(eventId, reservationId));
     }
 
 }
