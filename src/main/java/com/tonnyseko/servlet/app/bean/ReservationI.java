@@ -14,4 +14,15 @@ public interface ReservationI extends GenericBeanI<Reservation> {
 
     // list all user details from the reservation table by event_id
     List<Object[]> getReservationsByEventId(Long eventId);
+
+    Reservation findByEventAndReservation(Long eventId, Long reservationId);
+
+    // delete all reservations by event_id
+    void deleteByEventId(Long eventId);
+
+    // delete all reservations by user_id
+    void deleteByUserId(Long userId);
+
+    // delete all reservations by event_id and user_id
+    void deleteByEventIdAndUserId(Long eventId, Long userId);
 }

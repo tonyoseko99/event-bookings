@@ -49,5 +49,11 @@ public class PaymentRestApi extends BaseRestApi {
         return respond();
     }
 
-    // delete payment by id {ADMIN side}
+    // get payments by event id and reservation id
+    @Path("/list/{eventId}/{reservationId}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response get(@PathParam("eventId") Long eventId, @PathParam("reservationId") Long reservationId) {
+        return respond(paymentsBean.findByEventAndReservation(eventId, reservationId));
+    }
 }
