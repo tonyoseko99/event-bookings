@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.tonnyseko.servlet.app.bean.MpesaBeanI;
-import com.tonnyseko.servlet.app.model.helpers.MpesaCallbackData;
 import com.tonnyseko.servlet.app.model.helpers.PaymentRequest;
 
 @Path("/mpesa")

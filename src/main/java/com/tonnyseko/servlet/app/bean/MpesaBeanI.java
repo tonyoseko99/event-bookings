@@ -8,4 +8,6 @@ public interface MpesaBeanI extends Serializable {
     String initiateOnlinePayment(String phoneNumber, double amount, String accountReference, String transactionDesc);
 
     void handleCallback(String callbackJson);
+
+    boolean isPaymentMade(Long userId, Long eventId);
 }
