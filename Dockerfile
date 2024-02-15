@@ -4,19 +4,13 @@ FROM maven:3.9.5 as build
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the pom.xml file to the container
-COPY pom.xml .
-
-RUN mvn install
-
 # copy the necessary files to the container
 COPY . .
 
-# Build the application with Maven
-RUN mvn clean compile package
+RUN mvn clean install -DskipTests -X
 
 # Stage 2: Deploy the application to WildFly
-FROM jboss/wildfly:latest AS deploy
+FROM quay.io/wildfly/wildfly:26.1.3.Final-jdk17 AS deploy
 
 # Remove the default standalone.xml file from WildFly
 RUN rm /opt/jboss/wildfly/standalone/configuration/standalone.xml
@@ -27,7 +21,7 @@ COPY --from=build /app/standalone.xml /opt/jboss/wildfly/standalone/configuratio
 
 # Create the directory for the MySQL module
 RUN mkdir -p /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
-COPY --from=build /app/mysql/main/module.xml /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main
+COPY --from=build /app/module.xml /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main
 
 # Download the MySQL Connector/J JAR file
 RUN curl -o /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/mysql-connector-java-8.0.17.jar \

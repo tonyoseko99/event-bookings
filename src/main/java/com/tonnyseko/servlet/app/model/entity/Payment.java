@@ -1,21 +1,35 @@
 package com.tonnyseko.servlet.app.model.entity;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Entity
 @Table(name = "payments", uniqueConstraints = {
         @UniqueConstraint(columnNames = { "reservation_id", "user_id" })
 })
 public class Payment extends BaseEntity {
+
+    @OneToOne
+    @JoinColumn(name = "mpesa_transaction_id")
+    @Cascade(CascadeType.ALL)
+    private MpesaTransaction mpesaTransaction;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -36,6 +50,54 @@ public class Payment extends BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date paymentDate;
 
+    // New method to update payment date from Mpesa callback metadata or use current
+    // timestamp
+    private void updatePaymentDateFromCallbackMetadata(String callbackMetadata) {
+        try {
+            JsonNode metadataJson = new ObjectMapper().readTree(callbackMetadata);
+            JsonNode callbackNode = metadataJson.findPath("stkCallback");
+            JsonNode metadataItemsNode = callbackNode.findPath("CallbackMetadata").findPath("Item");
+
+            if (metadataItemsNode.isArray()) {
+                for (JsonNode itemNode : metadataItemsNode) {
+                    String name = itemNode.findPath("Name").asText();
+                    String value = itemNode.findPath("Value").asText();
+
+                    // Check if the item is "TransactionDate"
+                    if ("TransactionDate".equals(name)) {
+                        // Assuming value is a timestamp, you need to parse it into a Date
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+                        Date transactionDate = dateFormat.parse(value);
+
+                        // Set the payment date in your Payment entity
+                        this.paymentDate = transactionDate;
+                        break; // Exit the loop once TransactionDate is found
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Handle JSON parsing or date parsing exception as needed
+            e.printStackTrace(); // Log or throw an exception, based on your error handling strategy
+        }
+    }
+
+    private String parsePaymentData(String callbackMetadata) {
+        try {
+            JsonNode metadataJson = new ObjectMapper().readTree(callbackMetadata);
+            JsonNode callbackNode = metadataJson.findPath("stkCallback");
+            JsonNode transactionDateNode = callbackNode.findPath("CallbackMetadata")
+                    .findPath("Item")
+                    .elements()
+                    .next()
+                    .findPath("Value");
+
+            return (transactionDateNode != null) ? transactionDateNode.asText() : null;
+        } catch (IOException e) {
+            // Handle JSON parsing exception as needed
+            return null;
+        }
+    }
+
     // check if payment is made
     public boolean isPaid() {
         return paymentDate != null;
@@ -49,20 +111,12 @@ public class Payment extends BaseEntity {
     public Payment() {
     }
 
-    public Payment(Long id, User user, Reservation reservation, double amount, Date paymentDate) {
-        setId(id);
+    public Payment(User user, Reservation reservation, Event event, double amount, Date paymentDate) {
         this.user = user;
         this.reservation = reservation;
+        this.event = event;
         this.amount = amount;
         this.paymentDate = paymentDate;
-    }
-
-    public Long getId() {
-        return super.getId();
-    }
-
-    public void setId(Long id) {
-        super.setId(id);
     }
 
     public User getUser() {

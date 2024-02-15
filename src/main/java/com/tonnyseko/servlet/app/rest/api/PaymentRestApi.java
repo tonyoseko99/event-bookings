@@ -7,7 +7,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -23,11 +22,8 @@ public class PaymentRestApi extends BaseRestApi {
     @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response list(@QueryParam("id") Long id) {
-        Payment filter = new Payment();
-        filter.setId(id);
-
-        return respond(paymentsBean.list(filter.getClass()));
+    public Response list() {
+        return respond(paymentsBean.list(Payment.class));
     }
 
     // get payment by id
@@ -37,7 +33,6 @@ public class PaymentRestApi extends BaseRestApi {
     public Response get(@PathParam("id") Long id) {
         return respond(paymentsBean.findById(Payment.class, id));
     }
-
 
     // add payment
     @Path("/add")

@@ -1,6 +1,5 @@
 package com.tonnyseko.servlet.app.bean;
 
-import java.io.Serializable;
 import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
@@ -12,7 +11,6 @@ import javax.json.JsonReader;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -25,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.tonnyseko.servlet.app.model.entity.MpesaTransaction;
+import com.tonnyseko.servlet.app.model.entity.Payment;
 import com.tonnyseko.servlet.app.model.helpers.MpesaCallbackData;
 
 import jakarta.json.JsonException;
@@ -142,7 +141,7 @@ public class MpesaBean implements MpesaBeanI {
                     callbackData.getMerchantRequestID(), callbackData.getCheckoutRequestID());
 
             // Store callback data in the database
-            persistCallbackData(callbackData);
+            persistCallbackData(callbackData, null);
         } catch (JsonException e) {
             LOGGER.error("Failed to parse JSON callback data. Response: {}", callbackJson);
             throw new RuntimeException("Failed to parse JSON callback data");
@@ -158,25 +157,30 @@ public class MpesaBean implements MpesaBeanI {
         }
     }
 
-    private void persistCallbackData(MpesaCallbackData callbackData) {
-        // Check if the data already exists
-        MpesaTransaction mpesaTransaction = database.find(MpesaTransaction.class, callbackData.getMerchantRequestID());
-        if (mpesaTransaction == null) {
-            mpesaTransaction = new MpesaTransaction();
-            mpesaTransaction.setMerchantRequestId(callbackData.getMerchantRequestID());
-            mpesaTransaction.setCheckoutRequestId(callbackData.getCheckoutRequestID());
-            mpesaTransaction.setResponseCode(String.valueOf(callbackData.getResultCode()));
-            mpesaTransaction.setResponseDescription(callbackData.getResultDesc());
-            mpesaTransaction.setCustomerMessage(callbackData.getCallbackMetadata());
-
-            database.persist(mpesaTransaction);
+    private void persistCallbackData(MpesaCallbackData callbackData, MpesaTransaction payment) {
+        if (payment == null) {
+            payment = new MpesaTransaction();
         } else {
-            // Update existing data
-            mpesaTransaction.setResponseCode(String.valueOf(callbackData.getResultCode()));
-            mpesaTransaction.setResponseDescription(callbackData.getResultDesc());
-            mpesaTransaction.setCustomerMessage(callbackData.getCallbackMetadata());
+            // Update M-Pesa details in the Payment entity
+            payment.setMerchantRequestId(callbackData.getMerchantRequestID());
+            payment.setCheckoutRequestId(callbackData.getCheckoutRequestID());
+            payment.setResponseCode(String.valueOf(callbackData.getResultCode()));
+            payment.setResponseDescription(callbackData.getResultDesc());
+            payment.setCustomerMessage(callbackData.getCallbackMetadata());
 
-            database.merge(mpesaTransaction);
+            database.merge(payment);
         }
+    }
+
+    @Override
+    public boolean isPaymentMade(Long userId, Long eventId) {
+        Payment payment = (Payment) database.createNativeQuery(
+                "SELECT * FROM payments WHERE user_id = ? AND event_id = ?",
+                Payment.class)
+                .setParameter(1, userId)
+                .setParameter(2, eventId)
+                .getSingleResult();
+
+        return payment.isPaid();
     }
 }

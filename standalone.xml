@@ -134,26 +134,20 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                <datasource jndi-name="java:/MySqlDS" pool-name="MySqlDS">
-                    <connection-url>jdbc:mysql://localhost:3306/events</connection-url>
-                    <driver-class>com.mysql.cj.jdbc.Driver</driver-class>
+                <datasource jndi-name="java:jboss/datasources/MySqlDS" pool-name="MySqlDS">
+                    <connection-url>jdbc:mysql://mysql:3306/events</connection-url>
                     <driver>mysql</driver>
                     <security>
                         <user-name>devuser</user-name>
                         <password>password</password>
                     </security>
-                    <validation>
-                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
-                        <validate-on-match>true</validate-on-match>
-                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
-                    </validation>
                 </datasource>
+
                 <drivers>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
                     <driver name="mysql" module="com.mysql">
-                        <driver-class>com.mysql.cj.jdbc.Driver</driver-class>
                         <xa-datasource-class>com.mysql.cj.jdbc.MysqlXADataSource</xa-datasource-class>
                     </driver>
                 </drivers>
@@ -528,7 +522,5 @@
         </outbound-socket-binding>
     </socket-binding-group>
     <deployments>
-        <deployment name="bookings.war" runtime-name="bookings.war">
-            <content sha1="b666a1353992697df977e9da7bc3acb01b558fbd"/>
-        </deployment>
     </deployments>
+</server>

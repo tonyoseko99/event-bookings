@@ -14,9 +14,14 @@ public class MpesaCallbackData implements Serializable {
     }
 
     public MpesaCallbackData(Map<String, String[]> parameterMap) {
+        // Initialize fields from the parameter map
         this.merchantRequestID = getParameter(parameterMap, "MerchantRequestID");
         this.checkoutRequestID = getParameter(parameterMap, "CheckoutRequestID");
-        this.resultCode = Integer.parseInt(getParameter(parameterMap, "ResultCode"));
+
+        // Handle conversion to int for ResultCode
+        String resultCodeStr = getParameter(parameterMap, "ResultCode");
+        this.resultCode = (resultCodeStr != null) ? Integer.parseInt(resultCodeStr) : 0;
+
         this.resultDesc = getParameter(parameterMap, "ResultDesc");
         this.callbackMetadata = getParameter(parameterMap, "CallbackMetadata");
     }

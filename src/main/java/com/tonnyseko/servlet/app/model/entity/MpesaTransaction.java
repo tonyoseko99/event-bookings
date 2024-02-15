@@ -3,6 +3,7 @@ package com.tonnyseko.servlet.app.model.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +25,9 @@ public class MpesaTransaction {
 
     @Column(name = "customer_message")
     private String customerMessage;
+
+    @OneToOne(mappedBy = "mpesaTransaction")
+    private Payment payment;
 
     // getters and setters
 

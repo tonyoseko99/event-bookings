@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neflixx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: neflixx-app
+  template:
+    metadata:
+      labels:
+        app: neflixx-app
+    spec:
+      containers:
+      - name: neflixx-app
+        image: tonnyseko/neflixx-app:latest
+        ports:
+        - containerPort: 80
