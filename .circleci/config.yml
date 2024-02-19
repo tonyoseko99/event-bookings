@@ -20,7 +20,7 @@ jobs:
             docker build -t $IMAGE_NAME:v1.0 .
             docker tag $IMAGE_NAME:v1.0 $IMAGE_NAME:$CIRCLE_BUILD_NUM
             docker tag $IMAGE_NAME:v1.0 $IMAGE_NAME:latest
-            docker save -o image.tar $IMAGE_NAME:v1.0
+            docker save -o image.tar $IMAGE_NAME:v1.0  
       - run:
           name: List directory contents
           command: ls -lA
