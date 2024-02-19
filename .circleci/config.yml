@@ -20,6 +20,9 @@ jobs:
             docker build -t $IMAGE_NAME:v1.0 .
             docker tag $IMAGE_NAME:v1.0 $IMAGE_NAME:$CIRCLE_BUILD_NUM
             docker tag $IMAGE_NAME:v1.0 $IMAGE_NAME:latest
+      - run:
+          name: List directory contents
+          command: ls -lA
       - persist_to_workspace:
           root: .
           paths:
