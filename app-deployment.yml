@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookings
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookings
+  template:
+    metadata:
+      labels:
+        app: bookings
+    spec:
+      containers:
+      - name: bookings
+        image: tonnyseko/bookings:latest
+        ports:
+        - containerPort: 8080
